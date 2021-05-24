@@ -14,8 +14,4 @@ class Question extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-    public function topics()
-    {
-        return $this->belongsTo(Topic::class);
-    }
 }

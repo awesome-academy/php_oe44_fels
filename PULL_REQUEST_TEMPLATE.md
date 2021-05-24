@@ -3,10 +3,11 @@
 -->
 
 ## Related Tickets:
-- [#36544](https://edu-redmine.sun-asterisk.vn/issues/36575)
+- [#36544](https://edu-redmine.sun-asterisk.vn/issues/36544)
+- [#36575](https://edu-redmine.sun-asterisk.vn/issues/36575)
 
 ## WHAT this PR does?
-- Init model and relationship
+- Migrations
 <!--
 - ex: Change number items `completed/total` in admin page.
 -->

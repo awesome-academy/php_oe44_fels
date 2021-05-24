@@ -9,13 +9,13 @@ class Topic extends Model
 {
     use HasFactory;
 
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
-
     public function users()
     {
         return $this->belongsToMany(User::class,'user_topics')->withTimestamps();
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }
