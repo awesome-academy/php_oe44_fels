@@ -17,10 +17,10 @@ class CreateUserLessonsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('lesson_id');
-            $table->string('result',5);
+            $table->string('result',5)->nullable();
             $table->boolean('status');
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
