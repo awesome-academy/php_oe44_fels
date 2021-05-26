@@ -57,7 +57,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        @lang('Forgot Your Password?')
+                                        @lang('ForgotPassword?')
                                     </a>
                                 @endif
                             </div>
@@ -65,9 +65,9 @@
 
                         <div class="form-group row mt-5">
                             <div class="col-md-6 offset-md-3">
-                                <a href="" class="btn btn-danger btn-block">@lang('Login with Google')</a>
-                                <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">@lang('Login with Facebook')</a>
-                                <a href="" class="btn btn-dark btn-block">@lang('Login with Twitter')</a>
+                                <a href="{{route('login.google')}}" class="btn btn-danger btn-block">@lang('LoginGoogle')</a>
+                                <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">@lang('LoginFacebook')</a>
+                                <a href="" class="btn btn-dark btn-block">@lang('LoginTwitter')</a>
                             </div>
                         </div>
                     </form>
