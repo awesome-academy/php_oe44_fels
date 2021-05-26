@@ -1,0 +1,17 @@
+{
+    "App-name": "FELS",
+    "Name": "Họ và tên",
+    "Login": "Đăng nhập",
+    "Register": "Đăng ký",
+    "Remember Me": "Nhớ mật khẩu",
+    "ForgotPassword?": "Quên mật khẩu?",
+    "LoginGoogle": "Đăng nhập Google",
+    "LoginFacebook": "Đăng nhập Facebook",
+    "LoginTwitter": "Đăng nhập Twitter",
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "Confirm Password": "Xác nhận mật khấu",
+    "Please confirm": "Xác nhận mật khẩu trước khi tiếp tục.",
+    "Reset Password": "Đặt lại mật khẩu",
+    "SendLinkPassword": "Gửi liên kết đặt lại mật khẩu"
+}
