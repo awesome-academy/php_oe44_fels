@@ -1,79 +1,87 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                <h1 class="text-center">@lang('Login')</h1>
-                </div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-3">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="@lang('Email')" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-3">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="@lang('Password')" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        @lang('Remember Me')
-                                    </label>
+<section class="login-block">
+    <!-- Container-fluid starts -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Authentication card start -->
+                <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="auth-box card">
+                        <div class="card-block">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-center">@lang('Login')</h3>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-3">
-                                <button type="submit" class="btn btn-primary">
-                                    @lang('Login')
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        @lang('ForgotPassword?')
-                                    </a>
-                                @endif
+                            <div class="form-group form-primary">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <span class="form-bar"></span>
+                                <label class="float-label">@lang('Email')</label>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-                        </div>
+                            <div class="form-group form-primary">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <span class="form-bar"></span>
+                                <label class="float-label">@lang('Password')</label>
 
-                        <div class="form-group row mt-5">
-                            <div class="col-md-6 offset-md-3">
-                                <a href="{{route('login.google')}}" class="btn btn-danger btn-block">@lang('LoginGoogle')</a>
-                                <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">@lang('LoginFacebook')</a>
-                                <a href="" class="btn btn-dark btn-block">@lang('LoginTwitter')</a>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
+                            <div class="row m-t-25 text-left">
+                                <div class="col-12">
+                                    <div class="checkbox-fade fade-in-primary d-">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                            <label class="form-check-label" for="remember">
+                                                @lang('Remember Me')
+                                            </label>
+                                        </label>
+                                    </div>
+                                    <div class="forgot-phone text-right f-right">
+                                        @if (Route::has('password.request'))
+                                        <a class="text-right f-w-600" href="{{ route('password.request') }}">
+                                            @lang('ForgotPassword?')
+                                        </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">
+                                        @lang('Login')
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <a href="{{route('login.facebook')}}" class="btn waves-effect waves-light btn-facebook"><i class="icofont icofont-social-facebook"></i>Facebook</a>
+                                    <a href="#" class="btn waves-effect waves-light btn-twitter"><i class="icofont icofont-social-twitter"></i>Twitter</a>
+                                    <a href="{{route('login.google')}}" class="btn waves-effect waves-light btn-google-plus"><i class="icofont icofont-social-google-plus"></i>Google</a>
+                                </div>
+                            </div>
+                           
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+                <!-- end of form -->
             </div>
+            <!-- end of col-sm-12 -->
         </div>
+        <!-- end of row -->
     </div>
-</div>
+    <!-- end of container-fluid -->
+</section>
 @endsection
