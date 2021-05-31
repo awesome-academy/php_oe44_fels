@@ -2,6 +2,7 @@
     "App-name": "FELS",
     "Name": "Name",
     "Login": "Login",
+    "Logout": "Logout",
     "Register": "Register",
     "RegisterNow": "RegisterNow",
     "Remember Me": "Remember Me",
@@ -11,5 +12,17 @@
     "Confirm Password": "Confirm Password",
     "Please confirm": "Please confirm your password before continuing.",
     "Reset Password": "Reset Password",
-    "SendLinkPassword": "Send Password Reset Link"
+    "SendLinkPassword": "Send Password Reset Link",
+    "Next": "Next",
+    "Dashboard": "Dashboard",
+    "WhatTopicLike": "What topics do you like?",
+    "RegisteredCourses": "Registered Courses",
+    "OtherCourses": "Other Courses",
+    "Catalog": "Catalog",
+    "Search": "Search",
+    "Profile": "Profile",
+    "Welcome": "Welcome to Framgia E-Learning System",
+    "CoursesOfTopicUlike": "Courses related to the topic you like",
+    "noCourseExist": "You don't have any courses yet.",
+    "viewCourses": "view courses"
 }

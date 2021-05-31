@@ -30,9 +30,29 @@ File: style.css
 /**  =====================
       Custom css start
 ==========================  **/
-
+.title-main{
+    text-transform: uppercase;
+}
 .fixed-button {
     display: none;
+}
+
+.infor-lesson {
+    position: absolute;
+    width: 80%;
+    height: auto;
+    top: 100%;
+    left: 20%;
+    right: 0%;
+}
+
+.accordion-panel {
+    clear: both;
+}
+
+.btn-action-lesson {
+    font-size: 10px;
+    margin-bottom: 1rem;
 }
 
 body {
@@ -4052,6 +4072,10 @@ a[data-toggle="lightbox"] .img-fluid {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 5px 0;
+}
+
+.row {
+    justify-content: flex-start;
 }
 
 .vertical-alignment .row {
@@ -8512,6 +8536,7 @@ table tbody .border-bottom-info td {
 .pcoded .pcoded-content {
     position: relative;
     display: block;
+    min-height: 100vh;
 }
 
 .pcoded-inner-navbar {

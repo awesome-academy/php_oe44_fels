@@ -2,6 +2,7 @@
     "App-name": "FELS",
     "Name": "Họ và tên",
     "Login": "Đăng nhập",
+    "Logout": "Đăng xuất",
     "Register": "Đăng ký",
     "RegisterNow": "Đăng ký ngay",
     "Remember Me": "Nhớ mật khẩu",
@@ -11,5 +12,17 @@
     "Confirm Password": "Xác nhận mật khấu",
     "Please confirm": "Xác nhận mật khẩu trước khi tiếp tục.",
     "Reset Password": "Đặt lại mật khẩu",
-    "SendLinkPassword": "Gửi liên kết đặt lại mật khẩu"
+    "SendLinkPassword": "Gửi liên kết đặt lại mật khẩu",
+    "Next": "Tiếp tục",
+    "Dashboard":"Bảng điều khiển",
+    "WhatTopicLike":"Chủ để mà bạn yêu thích là gì?",
+    "RegisteredCourses":"Các khóa học đã đăng ký",
+    "OtherCourses":"Các khóa học khác",
+    "Catalog":"Danh mục",
+    "Search": "Tìm kiếm",
+    "Profile": "Hồ sơ",
+    "Welcome": "Chào mừng bạn đến với Hệ thống học tập điện tử Framgia",
+    "CoursesOfTopicUlike": "Các khóa học liên quan đến chủ đề mà bạn thích",
+    "noCourseExist": "Bạn chưa đăng ký khóa học nào.",
+    "viewCourses": "Khóa học..."
 }
