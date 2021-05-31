@@ -18,7 +18,7 @@ class CreateUserCoursesTable extends Migration
             $table->integer('user_id');
             $table->integer('course_id');
             $table->boolean('status');
-            $table->date('start_day');
+            $table->date('start_day')->default(date("Y-m-d"));
             $table->date('end_day')->nullable();
             $table->timestamps();
         });

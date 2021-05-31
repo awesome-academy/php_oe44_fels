@@ -34,6 +34,8 @@
 </head>
 
 <body>
+    <a href="{{ route('i18n','vi') }}">VI</a>
+    <a href="{{ route('i18n','en') }}">EN</a>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -86,7 +88,7 @@
                                                      document.getElementById('logout-form').submit();">
                                     @lang('Logout')
                                 </a>
-                                
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -150,7 +152,7 @@
             </div>
         </div>
     </div>
-        @include('layouts.scripts.jsHome')
-    
+    @include('layouts.scripts.jsHome')
 </body>
+
 </html>

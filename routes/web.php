@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\I18nController;
+use App\Http\Controllers\UserCourseController;
+use App\Http\Controllers\UserLessonController;
+use App\Http\Controllers\UserTopicController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +26,15 @@ Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookC
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+Route::post('/user_topic/insert', [UserTopicController::class ,'insert'])->name('user_topic.insert');
+
+Route::post('/user_course/insert/{course_id}', [UserCourseController::class ,'insert'])->name('user_course.insert');
+
+Route::get('/other-courses', [CourseController::class ,'index'])->name('other.courses');
+
+Route::group(['middleware' => 'auth'], function()
+{
+   Route::get('lessons/{course_id}' , [UserLessonController::class, 'index'])->name('lessons');
+   Route::get('lesson/start/{lesson_id}' , [UserLessonController::class, 'start'])->name('lesson.start');
+});

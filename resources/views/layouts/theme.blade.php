@@ -19,25 +19,29 @@
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <!-- waves.css -->
-    <link rel="stylesheet" href="{{asset('pages/waves/css/waves.min.css')}}" type="text/css" media="all">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap/css/bootstrap.min.css')}}">
     <!-- waves.css -->
     <link rel="stylesheet" href="{{asset('pages/waves/css/waves.min.css')}}" type="text/css" media="all">
     <!-- themify icon -->
     <link rel="stylesheet" type="text/css" href="{{asset('icon/themify-icons/themify-icons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/css/icofont.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="{{asset('icon/font-awesome/css/font-awesome.min.css')}}">
     <!-- scrollbar.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.mCustomScrollbar.css')}}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('ss/jquery.mCustomScrollbar.css')}}">
 </head>
 
 <body>
     @include('layouts.loader')
+    @include('layouts.menuTop')
+
     @yield('content')
+
+    @include('layouts.menuBottom')
     @include('layouts.scripts.jsHome')
 </body>
 
