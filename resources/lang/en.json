@@ -24,5 +24,13 @@
     "Welcome": "Welcome to Framgia E-Learning System",
     "CoursesOfTopicUlike": "Courses related to the topic you like",
     "noCourseExist": "You don't have any courses yet.",
-    "viewCourses": "view courses"
+    "viewCourses": "view courses",
+    "LearnNow": "Learn Now",
+    "Courses" : "Courses",
+    "Lessons" : "Lessons",
+    "Start": "Start",
+    "LessonNotExist": "This lesson is not on your list of courses",
+    "error" :{
+        "500" : "Server is experiencing problems, Please come back later"
+    }
 }

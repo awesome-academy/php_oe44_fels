@@ -24,8 +24,4 @@ class Lesson extends Model
         return $this->hasMany(Word::class);
     }
 
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
 }

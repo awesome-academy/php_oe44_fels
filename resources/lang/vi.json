@@ -24,5 +24,13 @@
     "Welcome": "Chào mừng bạn đến với Hệ thống học tập điện tử Framgia",
     "CoursesOfTopicUlike": "Các khóa học liên quan đến chủ đề mà bạn thích",
     "noCourseExist": "Bạn chưa đăng ký khóa học nào.",
-    "viewCourses": "Khóa học..."
+    "viewCourses": "Khóa học...",
+    "LearnNow": "Học ngay",
+    "Courses" : "Các khóa học",
+    "Lessons" : "Các bài học",
+    "Start": "Bắt đầu",
+    "LessonNotExist": "Bài học này không có trong danh sách các khóa học của bạn",
+    "error" :{
+        "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
+    }
 }
