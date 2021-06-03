@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('lesson_id');
+            $table->integer('word_id');
             $table->text('question');
             $table->text('option_1');
             $table->text('option_2');

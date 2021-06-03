@@ -9,9 +9,9 @@ class Question extends Model
 {
     use HasFactory;
 
-    public function lessons()
+    public function words()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Word::class);
     }
 
 }

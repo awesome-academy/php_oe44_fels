@@ -28,6 +28,10 @@
     <div class="main-body">
       <div class="page-wrapper">
         <!-- Page-body start -->
+        @if(session('status'))
+            <p class="text-danger">{{ session('status') }}</p>
+        @endif
+
         @if(count($user_topics) == 0)
         <div class="page-body">
           <div class="row">
@@ -36,8 +40,8 @@
               @csrf
               <h2>@lang('WhatTopicLike')</h2>
               <div class="row m-t-25 text-left">
-                @foreach($topics as $topic)
 
+                @foreach($topics as $topic)
                 <div class="col-md-12">
                   <div class=" fade-in-primary">
                     <label>
@@ -47,91 +51,58 @@
                     </label>
                   </div>
                 </div>
-
                 @endforeach
+
               </div>
               <button type="submit" class="btn btn-primary waves-effect waves-light">@lang('Next')</button>
             </form>
           </div>
         </div>
+
         @else
         <div class="page-body">
           <h5 class="text-dark">@lang('RegisteredCourses')</h5>
           <hr>
-          <div class="row">
-            @if(count($listMyCourse) == 0)
-            <p class="text-center w-100"> @lang('noCourseExist') <a class="text-danger" href="{{route('other.courses')}}">[@lang('viewCourses')]</a></p>
-            @else
-            @foreach($listMyCourse as $items)
-            @foreach($items as $value)
 
-            <div class="col-xl-4 col-md-6 row mt-4 ml-3">
-              <div class="card mb-0">
-                <div class="card-block">
-                  <div class="row align-items-center">
-                    <div class="col-8">
-                      <h4 class="text-c-purple">{{$value->name}}</h4>
-                      <h6 class="text-muted m-b-0">{{$value->described}}</h6>
-                    </div>
-                    <div class="col-4 text-right">
-                      <i class="fa fa-bar-chart f-28"></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer bg-c-purple">
-                  <div class="row align-items-center">
-                    <div class="col-9">
-                      <p class="text-white m-b-0">
-                        @foreach($topics as $item)
-                        @if($item->id == $value->topic_id)
-                        {{ $item->name }}
-                        @break
-                        @endif
-                        @endforeach
-                      </p>
-                    </div>
-                    <div class="col-3 text-right">
-                      <i onclick="showHideInfor('#infor-course_{{$value->id}}')" class="fa fa-line-chart text-white f-16"></i>
-                    </div>
-                  </div>
-                </div>
+          @if(count($listMyCourse) == 0)
+          <p class="text-center w-100"> @lang('noCourseExist') <a class="text-danger" href="{{route('other.courses')}}">[@lang('viewCourses')]</a></p>
+          @else
+
+          @foreach($listMyCourse as $items)
+          @foreach($items as $value)
+          <div class="card">
+            <div class="card-block caption-breadcrumb">
+              <div class="breadcrumb-header">
+                <h5>{{$value->name}}</h5>
+                <span>{{$value->described}}</span>
               </div>
-              <div class="float-start infor-lesson bg-info" id="infor-course_{{$value->id}}" style="display: none;">
-                <div class="card-block accordion-block">
-                  <div id="accordion" role="tablist" aria-multiselectable="true">
-                    @foreach($lessonOfMyCourse as $keys)
-                    @foreach($keys as $it)
-                    @if($it->course_id == $value->id)
-                    <div class="accordion-panel">
-                      <div class="accordion-heading" role="tab" id="headingOne">
-                        <h3 class="card-title accordion-title">
-                          <a class="accordion-msg waves-effect waves-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{$value->id . $it->id}}" aria-expanded="true" aria-controls="collapseOne{{$value->id . $it->id}}">
-                            {{$it->name}}
-                          </a>
-                        </h3>
-                      </div>
-                      <div id="collapseOne{{$value->id . $it->id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="accordion-content accordion-desc">
-                          <p>{{$it->described}}</p>
-                          <br>
-                          <button class="btn-action-lesson btn waves-effect waves-light btn-grd-success float-right">Ready</button>
-                          <button class="btn-action-lesson btn waves-effect waves-light btn-grd-warning float-right">Result</button>
+              <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                  <li class="breadcrumb-item">
+                    <a href="#!">
+                      <i class="icofont icofont-home"></i>
+                    </a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#!">
 
-                        </div>
+                      @foreach($topics as $item)
+                      @if($item->id == $value->topic_id)
+                      {{ $item->name }}
+                      @break
+                      @endif
+                      @endforeach
 
-                      </div>
-                    </div>
-                    @endif
-                    @endforeach
-                    @endforeach
-                  </div>
-                </div>
+                    </a>
+                  </li>
+                  <li class="float-right"><a href="{{ route('lessons', $value->id) }}">@lang('LearnNow')</a>
+                  </li>
+                </ul>
               </div>
             </div>
-            @endforeach
-            @endforeach
-            @endif
           </div>
+          @endforeach
+          @endforeach
+          @endif
         </div>
         @endif
       </div>
