@@ -18,6 +18,7 @@
 <script src="{{asset('js/vertical-layout.min.js')}}"></script>
 <!-- custom js -->
 <script type="text/javascript" src="{{asset('js/script.js')}} "></script>
+<script src="{{asset('js/textToSpeech.js')}}"></script>
 <script>
     function showHideInfor(v) {
         $(v).toggle();

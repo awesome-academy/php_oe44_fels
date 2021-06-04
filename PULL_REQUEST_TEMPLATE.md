@@ -8,12 +8,14 @@
 - [#36545](https://edu-redmine.sun-asterisk.vn/issues/36545)
 - [#36539](https://edu-redmine.sun-asterisk.vn/issues/36539)
 - [#36541](https://edu-redmine.sun-asterisk.vn/issues/36541)
+- [#36555](https://edu-redmine.sun-asterisk.vn/issues/36555)
 ## WHAT this PR does?
 - Init Model and relationship
 - Migrations
 - Seedding data
 - Login Facebook
 - Login Google
+- Handling lesson logic
 <!--
 - ex: Change number items `completed/total` in admin page.
 -->

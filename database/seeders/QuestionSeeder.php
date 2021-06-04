@@ -106,7 +106,7 @@ class QuestionSeeder extends Seeder
             $vocabulary[$i] = '_';
         }
 
-        $answers = [$correctAns];
+        $answers = [strtolower($correctAns)];
         while (true) {
             $res = "";
             for ($i = 0; $i < $randomNumberOfCharactersToCut; $i++) {

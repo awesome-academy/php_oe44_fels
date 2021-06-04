@@ -30,6 +30,18 @@
     "Lessons" : "Các bài học",
     "Start": "Bắt đầu",
     "LessonNotExist": "Bài học này không có trong danh sách các khóa học của bạn",
+    "NotPass": "Chưa vượt qua",
+    "Passed": "Đã vượt qua",
+    "Unfinished": "Chưa xong",
+    "Vocabulary": "Từ vựng",
+    "Spelling": "Phiên âm",
+    "Translate": "Phiên dịch",
+    "Voice": "Giọng nói",
+    "Volume": "Âm lượng",
+    "Rate": "Mức độ",
+    "Result" : "Kết quả",
+    "ShowResult": "Kiểm tra",
+    "Submit" : "Hoàn tất",
     "error" :{
         "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
     }

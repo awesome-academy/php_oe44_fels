@@ -26,11 +26,23 @@
     "noCourseExist": "You don't have any courses yet.",
     "viewCourses": "view courses",
     "LearnNow": "Learn Now",
-    "Courses" : "Courses",
-    "Lessons" : "Lessons",
+    "Courses": "Courses",
+    "Lessons": "Lessons",
     "Start": "Start",
     "LessonNotExist": "This lesson is not on your list of courses",
-    "error" :{
+    "NotPass": "Not Pass",
+    "Passed": "Passed",
+    "Unfinished": "Unfinished",
+    "Vocabulary": "Vocabulary",
+    "Spelling": "Spelling",
+    "Translate": "Translate",
+    "Voice": "Voice",
+    "Volume": "Volume",
+    "Rate": "Rate",
+    "Result": "Result",
+    "ShowResult": "Show Result",
+    "Submit" : "Submit",
+    "error":{
         "500" : "Server is experiencing problems, Please come back later"
     }
 }

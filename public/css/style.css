@@ -30,6 +30,54 @@ File: style.css
 /**  =====================
       Custom css start
 ==========================  **/
+@keyframes erase {
+    from {width: 50%; opacity:0;}
+    to {width: 100%; opacity:1;}
+  }
+
+#container-questions,
+#done-questions,
+#lesson_id,
+#user_id
+{
+    display: none;
+}
+
+.txt-vocabulary{
+    font-size: 20px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+.txt-translate{
+    font-size: 20px;
+}
+#tools-voice{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    bottom: 2vh;
+    width: fit-content;
+    height: fit-content;
+    float: right;
+    z-index: 100;
+    border-radius: 5px;
+}
+#tools-voice p{
+    margin: 0;
+    padding-left: 1rem;
+    font-size: 13px;
+}
+#tools-voice input{
+    margin: 0;
+    padding-left: 1rem;
+}
+#voices{
+    margin: 0 1rem;
+}
+.path{
+    min-height: 1vh;
+}
 .title-main{
     text-transform: uppercase;
 }
@@ -226,6 +274,8 @@ strong {
 /*====== Ready to use Css End ======*/
 
 .card {
+    clear: both;
+    height: fit-content;
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
@@ -15263,7 +15313,6 @@ select.form-control:hover {
 /**  =====================
       Label-Badges css start
 ==========================  **/
-
 .label {
     border-radius: 4px;
     font-size: 75%;
@@ -15276,7 +15325,7 @@ select.form-control:hover {
 .label-main {
     display: inline-block;
     vertical-align: middle;
-    margin: 8px 5px;
+    margin: 1rem 0px 0px 0px;
 }
 
 .badge {
@@ -16571,15 +16620,6 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 #checkbox-select tr th.select-checkbox:before,
 #checkbox-select tr th.select-checkbox:after {
     left: 15px;
-}
-
-.table td,
-.table th {
-    padding: 1.25rem 0.75rem;
-}
-
-.table thead th {
-    border-bottom: 1px solid #d6dde1;
 }
 
 .invoive-info .table td,

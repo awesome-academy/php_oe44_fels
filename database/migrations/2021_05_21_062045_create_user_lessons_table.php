@@ -17,7 +17,7 @@ class CreateUserLessonsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('lesson_id');
-            $table->string('result',5)->nullable();
+            $table->string('result_string')->nullable(); // 15/20
             $table->boolean('status');
             $table->timestamps();
         }); 
@@ -33,3 +33,4 @@ class CreateUserLessonsTable extends Migration
         Schema::dropIfExists('user_lessons');
     }
 }
+
