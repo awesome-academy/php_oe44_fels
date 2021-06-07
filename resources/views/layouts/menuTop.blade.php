@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="index.html">
+                    <a href="{{route('home')}}">
                         <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
                     </a>
                     <a class="mobile-options waves-effect waves-light">
@@ -51,7 +51,7 @@
                         <a href="{{ route('i18n','en') }}">EN</a>
                         <li class="user-profile header-notification">
                             <a href="#!" class="waves-effect waves-light">
-                                @if(Auth::user()->provider_id)
+                                @if(Auth::user()->provider_id && strpos(Auth::user()->avatar,'http'))
                                 <img src="{{ Auth::user()->avatar }}" class="img-radius" alt="{{ Auth::user()->name }}">
                                 @else
                                 @php
@@ -64,7 +64,7 @@
                             </a>
                             <ul class="show-notification profile-notification">
                                 <li class="waves-effect waves-light">
-                                    <a href="user-profile.html">
+                                    <a href="{{route('user.profile')}}">
                                         <i class="ti-user"></i> @lang('Profile')
                                     </a>
                                 </li>
@@ -90,7 +90,7 @@
                     <div class="pcoded-inner-navbar main-menu">
                         <div class="">
                             <div class="main-menu-header">
-                                @if(Auth::user()->provider_id)
+                                @if(Auth::user()->provider_id && strpos(Auth::user()->avatar,'http'))
                                 <img class="img-80 img-radius" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}">
                                 @else
                                 @php
@@ -106,7 +106,7 @@
                             <div class="main-menu-content">
                                 <ul>
                                     <li class="more-details">
-                                        <a href="user-profile.html"><i class="ti-user"></i>@lang('Profile')</a>
+                                        <a href="{{route('user.profile')}}"><i class="ti-user"></i>@lang('Profile')</a>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="ti-layout-sidebar-left"></i>@lang('Logout')</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

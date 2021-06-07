@@ -78,6 +78,17 @@ File: style.css
 .path{
     min-height: 1vh;
 }
+.avatar{
+    height: 100px;
+}
+
+#container_password{
+    display: none;
+}
+#form-edit-user{
+    display: none;
+}
+
 .title-main{
     text-transform: uppercase;
 }
@@ -14944,7 +14955,7 @@ body.menu-bottom #collapse-menu {
 
 .form-material .form-group.form-static-label .form-control~.float-label {
     top: -14px;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .form-material .form-control {

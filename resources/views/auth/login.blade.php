@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <!-- Authentication card start -->
-                <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
+                <form class="md-float-material form-material" method="POST" action="{{ route('user.login') }}">
                     @csrf
                     <div class="auth-box card">
                         <div class="card-block">
@@ -20,11 +20,15 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 <span class="form-bar"></span>
                                 <label class="float-label">@lang('Email')</label>
+                                @if(session("statusEmail"))
+                                <p class="text-danger"> {{ session("statusEmail") }}</p>
+                                @endif
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+
                             </div>
                             <div class="form-group form-primary">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -36,6 +40,10 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                @if(session("statusPassword"))
+                                <p class="text-danger"> {{ session("statusPassword") }}</p>
+                                @endif
+
                             </div>
                             <div class="row m-t-25 text-left">
                                 <div class="col-12">
@@ -72,7 +80,7 @@
                                     <a href="{{route('login.google')}}" class="btn waves-effect waves-light btn-google-plus"><i class="icofont icofont-social-google-plus"></i>Google</a>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </form>
