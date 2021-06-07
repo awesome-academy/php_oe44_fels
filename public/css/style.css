@@ -34,7 +34,14 @@ File: style.css
     from {width: 50%; opacity:0;}
     to {width: 100%; opacity:1;}
   }
-
+.category{
+    font-size: 15px;
+    color: black;
+    font-weight: lighter;
+}
+.between{
+    width: 80%;
+}
 #container-questions,
 #done-questions,
 #lesson_id,

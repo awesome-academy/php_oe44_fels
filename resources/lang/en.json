@@ -44,6 +44,14 @@
     "Submit" : "Submit",
     "PasswordMis": "Password mismatched",
     "EmailMis": "Email mismatched",
+    "ListWord": "List Word",
+    "VocabularyForU": "Vocabulary For You",
+    "Filter": "Filter",
+    "NoFilter": "No Filter",
+    "FilterAlphabet": "Filter words by alphabet",
+    "FilterType": "Filter words by word type",
+    "FilterLearned": "Filter words by learned",
+    "FilterUnlearned": "Filter words by unlearned",
     "error":{
         "500" : "Server is experiencing problems, Please come back later"
     }

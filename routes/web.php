@@ -8,6 +8,7 @@ use App\Http\Controllers\UserLessonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCourseController;
 use App\Http\Controllers\UserTopicController;
+use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,9 @@ Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name(
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('words', [WordController::class, 'index'])->name('words');
+
     Route::get('lessons/{course_id}', [UserLessonController::class, 'index'])->name('lessons');
     Route::get('lesson/start/{lesson_id}', [UserLessonController::class, 'start'])->name('lesson.start');
 
