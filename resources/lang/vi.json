@@ -42,6 +42,8 @@
     "Result" : "Kết quả",
     "ShowResult": "Kiểm tra",
     "Submit" : "Hoàn tất",
+    "PasswordMis": "Mật khẩu không khớp",
+    "EmailMis": "Email không tồn tại",
     "error" :{
         "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
     }

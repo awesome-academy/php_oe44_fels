@@ -34,6 +34,23 @@ $(document).ready(function () {
         }
     });
 
+    $('#changePass').click(function () {
+        if ($(this).prop("checked") == true) {
+            $('#container_password').show();
+            $('.pass').prop('required',true);
+        } else{
+            $('#container_password').hide();
+            $('.pass').prop('required',false);
+        }
+    });
+    $('#edit').click(function () {
+        if ($(this).prop("checked") == true) {
+            $('#form-edit-user').show();
+        } else{
+            $('#form-edit-user').hide();
+        }
+    });
+    // card js start
     $(".card-header-right .close-card").on('click', function () {
         var $this = $(this);
         $this.parents('.card').animate({
@@ -343,6 +360,8 @@ function saveResult() {
             });
         });
     }, 2000);
+}
 
-
+function showHideInfor(v) {
+    $(v).toggle();
 }
