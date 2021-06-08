@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <a href="{{route('home')}}">
-                        <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                        <img class="img-fluid" src="" alt="Theme-Logo" />
                     </a>
                     <a class="mobile-options waves-effect waves-light">
                         <i class="ti-more"></i>
@@ -109,7 +109,7 @@
                                         <a href="{{route('user.profile')}}"><i class="ti-user"></i>@lang('Profile')</a>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="ti-layout-sidebar-left"></i>@lang('Logout')</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        <form  action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
                                     </li>
@@ -141,7 +141,13 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-
+                            <li>
+                                <a href="{{route('words')}}" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('ListWord')</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
                         </ul>
 
                     </div>

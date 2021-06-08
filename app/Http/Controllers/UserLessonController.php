@@ -6,12 +6,15 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Question;
+use App\Models\User;
 use App\Models\User_Course;
 use App\Models\User_Lesson;
 use App\Models\Word;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use JsonException;
 
 class UserLessonController extends Controller
 {
@@ -24,8 +27,8 @@ class UserLessonController extends Controller
             $userLesson = User_Lesson::where([['user_id', Auth::user()->id], ['lesson_id', $lesson->id]])->first();
             array_push($userLessons, $userLesson);
         }
-
         $data = array('course' => $course, 'lessons' => $lessons, 'userLessons' => $userLessons);
+        
         return view('layouts.functions.lessons')->with('data', $data);
     }
 
@@ -42,7 +45,6 @@ class UserLessonController extends Controller
                         'user_id' => Auth::user()->id,
                         'lesson_id' => $lesson_id,
                         'result_string' => null,
-                        'result_bit' => null,
                         'status' => 0,
                     );
 
@@ -77,14 +79,27 @@ class UserLessonController extends Controller
         $ressult = $request->get('result');
         $lesson_id = $request->get('lesson_id');
         $user_id = $request->get('user_id');
-        $words = Word::where('lesson_id', $lesson_id)->count();
+        $resultAccepts = $request->get('resultAccepts');
+        $wordsCount = Word::where('lesson_id', $lesson_id)->count();
+
         $course_id = Lesson::find($lesson_id)->course_id;
-
+    // Update result for user_lesson
         $userLesson = User_Lesson::where([['user_id', $user_id], ['lesson_id', $lesson_id]])->first();
-
-        $userLesson->result_string = $ressult . '/' . $words;
+        $userLesson->result_string = $ressult . '/' . $wordsCount;
         $userLesson->status = 1;
         $userLesson->save();
+
+    // Update word learned for user
+        $user = User::find($user_id);
+        $words = $user->learned_word_list;
+        $wordsOld = explode(',', $words);
+        foreach($resultAccepts as $item){
+            if(!Arr::has($wordsOld, $item)){
+                array_push($wordsOld, $item);
+            }
+        }
+        $user->learned_word_list = implode(',', $wordsOld);
+        $user->save();
 
         return $course_id;
     }
@@ -100,7 +115,11 @@ class UserLessonController extends Controller
         if ($answer == $question->correct_answer) {
             $res = true;
         }
-        $response = ['id' => $idQuestion, 'correct_answer' =>  $question->correct_answer, 'message' => $res ? 'Correct' : 'Faile'];
+        $response = ['id' => $idQuestion, 
+                    'correct_answer' =>  $question->correct_answer, 
+                    'message' => $res ? 'Correct' : 'Faile', 
+                    'vocabulary' => Word::find($question->word_id)->vocabulary,
+                ];
 
         return json_encode($response);
     }

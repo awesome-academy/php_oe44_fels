@@ -44,6 +44,14 @@
     "Submit" : "Hoàn tất",
     "PasswordMis": "Mật khẩu không khớp",
     "EmailMis": "Email không tồn tại",
+    "ListWord": "Danh sách từ vựng",
+    "VocabularyForU": "Từ vựng dành cho bạn",
+    "Filter": "Bộ lọc",
+    "NoFilter": "Không Bộ lọc",
+    "FilterAlphabet": "Lọc từ theo bảng chữ cái",
+    "FilterType": "Lọc từ theo loại từ",
+    "FilterLearned": "Lọc các từ đã học",
+    "FilterUnlearned": "Lọc các từ chưa học",
     "error" :{
         "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
     }

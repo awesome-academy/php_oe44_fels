@@ -9,6 +9,7 @@
 - [#36539](https://edu-redmine.sun-asterisk.vn/issues/36539)
 - [#36541](https://edu-redmine.sun-asterisk.vn/issues/36541)
 - [#36555](https://edu-redmine.sun-asterisk.vn/issues/36555)
+- [#36553](https://edu-redmine.sun-asterisk.vn/issues/36553)
 ## WHAT this PR does?
 - Init Model and relationship
 - Migrations
@@ -16,6 +17,7 @@
 - Login Facebook
 - Login Google
 - Handling lesson logic
+- Filter Word List
 <!--
 - ex: Change number items `completed/total` in admin page.
 -->

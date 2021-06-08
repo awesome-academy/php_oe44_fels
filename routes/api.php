@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserLessonController;
+use App\Http\Controllers\WordController;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('questions/check', [UserLessonController::class, 'checkAnswer']);
 
 Route::post('user/lesson/result', [UserLessonController::class, 'updateResult']);
+
+Route::get('words/{option}', [WordController::class, 'filter'])->name('words');
+

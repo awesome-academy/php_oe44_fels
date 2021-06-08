@@ -1,5 +1,30 @@
 "use strict";
 $(document).ready(function () {
+
+    
+
+    $("#filter").change(function () {
+        var valueFilter = $("#filter option:selected").val();
+        $.ajax({
+            url: "http://localhost:8000/api/words/" + valueFilter,
+            method: 'GET',
+            success: function (e) {
+                console.log(JSON.parse(e));
+                var dataWords = JSON.parse(e);
+                $('#wordElements').empty();
+                for (let index = 0; index < dataWords.length; index++) {
+                    const element = dataWords[index];
+                    if(index > 0 && valueFilter == 2 && element['category_id'] != elementOld['category_id']){
+                        $('#wordElements').append('<hr class="between">');
+                    }
+                    var el= '<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right"> '+ (index+1) +' </span><h4 class="text-c-purple">'+ element['vocabulary'] +'<span class="font-italic category"> ('+ element['category_name'] +')</span></h4><h6 class="text-muted m-b-0">'+ element['translate'] +'</h6></div></div></div></div></div>';
+                    $('#wordElements').append(el);
+                    var elementOld = element;
+                };
+            }
+        });
+    }).change();
+
     // card js start
     var elementsVocabulary = document.querySelectorAll('.word');
     for (let index = 0; index < elementsVocabulary.length; index++) {
@@ -37,20 +62,20 @@ $(document).ready(function () {
     $('#changePass').click(function () {
         if ($(this).prop("checked") == true) {
             $('#container_password').show();
-            $('.pass').prop('required',true);
-        } else{
+            $('.pass').prop('required', true);
+        } else {
             $('#container_password').hide();
-            $('.pass').prop('required',false);
+            $('.pass').prop('required', false);
         }
     });
     $('#edit').click(function () {
         if ($(this).prop("checked") == true) {
             $('#form-edit-user').show();
-        } else{
+        } else {
             $('#form-edit-user').hide();
         }
     });
-    // card js start
+
     $(".card-header-right .close-card").on('click', function () {
         var $this = $(this);
         $this.parents('.card').animate({
@@ -294,6 +319,7 @@ $window.scroll(function () {
 });
 
 var resultAnswer = 0;
+var resultAccepts = [];
 function checkAnswer(idQuestion) {
     var answer = $('input[name=options' + idQuestion + ']:checked', '#questions' + idQuestion).val();
     console.log(answer);
@@ -328,6 +354,7 @@ function checkAnswer(idQuestion) {
                                 option.style.color = 'green';
                             }
                         });
+                        resultAccepts.push(result['vocabulary']);
                         resultAnswer += 1;
                     }
                     $('#checkAnswer' + result['id']).remove();
@@ -353,6 +380,7 @@ function saveResult() {
                     result: resultAnswer,
                     lesson_id: $('#lesson_id').text(),
                     user_id: $('#user_id').text(),
+                    resultAccepts, resultAccepts,
                 },
                 success: function (e) {
                     window.location.replace("http://localhost:8000/lessons/" + e);
@@ -360,8 +388,4 @@ function saveResult() {
             });
         });
     }, 2000);
-}
-
-function showHideInfor(v) {
-    $(v).toggle();
 }
