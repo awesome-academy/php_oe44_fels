@@ -6,7 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10 title-main">@lang('ListWord')</h5>
+                        <h5 class="m-b-10 title-main">@lang('list_word')</h5>
                     </div>
                 </div>
             </div>
@@ -19,19 +19,19 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
-                    <h5 class="text-dark">@lang('VocabularyForU')</h5>
+                    <h5 class="text-dark">@lang('vocabulary_foru')</h5>
                     <hr>
                     <div class="form-group row">
                         <label class="col-sm-1 col-form-label text-center">
-                            <h6>@lang('Filter') <i class="ti-filter"></i></h6>
+                            <h6>@lang('filter') <i class="ti-filter"></i></h6>
                         </label>
                         <div class="col-sm-11">
                             <select id="filter" name="select" class="form-control">
-                                <option value="0">@lang('NoFilter')</option>
-                                <option value="1">@lang('FilterAlphabet')</option>
-                                <option value="2">@lang('FilterType')</option>
-                                <option value="3">@lang('FilterLearned')</option>
-                                <option value="4">@lang('FilterUnlearned')</option>
+                                <option value="0">@lang('no_filter')</option>
+                                <option value="1">@lang('filter_alphabet')</option>
+                                <option value="2">@lang('filter_type')</option>
+                                <option value="3">@lang('filter_learned')</option>
+                                <option value="4">@lang('filter_unlearned')</option>
                             </select>
                         </div>
                     </div>

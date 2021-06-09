@@ -6,8 +6,8 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10 title-main">@lang('Profile')</h5>
-                        <p class="m-b-0">@lang('Welcome')</p>
+                        <h5 class="m-b-10 title-main">@lang('profile')</h5>
+                        <p class="m-b-0">@lang('welcome')</p>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,10 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Thong tin ca nhan</h5>
+                                    <h5>@lang('your_profile')</h5>
                                     <label class="text-right float-right" for="edit">
                                         <input type="checkbox" id="edit" class="mb-3">
-                                        Edit My Profile
+                                        @lang('edit') @lang('your_profile')
                                     </label>
                                     <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                 </div>
@@ -48,17 +48,17 @@
                                     </div>
 
                                     <div class="row">
-                                        <label class="col-4 text-right">Name</label>
+                                        <label class="col-4 text-right">@lang('name')</label>
                                         <label class="col-1 ">:</label>
                                         <label class="col-7">{{$inforUser->name}}</label>
                                     </div>
                                     <div class="row">
-                                        <label class="col-4 text-right">Email</label>
+                                        <label class="col-4 text-right">@lang('email')</label>
                                         <label class="col-1 ">:</label>
                                         <label class="col-7">{{$inforUser->email}}</label>
                                     </div>
                                     <div class="row">
-                                        <label class="col-4 text-right">Registration Date</label>
+                                        <label class="col-4 text-right">@lang('register_date')</label>
                                         <label class="col-1 ">:</label>
                                         <label class="col-7">{{$inforUser->created_at}}</label>
 
@@ -69,7 +69,7 @@
                         <div id="form-edit-user" class="col-md-5">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Edit</h5>
+                                    <h5>@lang('edit')</h5>
                                     <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                 </div>
                                 <div class="card-block">
@@ -92,42 +92,42 @@
                                         <div class="form-group form-default form-static-label">
                                             <input type="text" name="name" class="form-control" value="@if(old('name')) {{ old('name') }} @else {{$inforUser->name}} @endif" required="">
                                             <span class="form-bar"></span>
-                                            <label class="float-label">Your Name</label>
+                                            <label class="float-label">@lang('name')</label>
 
                                         </div>
                                         @if(Auth::user()->provider_id == null)
                                         <div class="form-group form-default form-static-label">
                                             <input type="text" name="email" class="form-control" value="@if(old('name')) {{ old('email') }} @else {{$inforUser->email}} @endif" required="">
                                             <span class="form-bar"></span>
-                                            <label class="float-label">Your Email</label>
+                                            <label class="float-label">@lang('email')</label>
 
                                         </div>
                                         <label for="changePass">
                                             <input type="checkbox" name="isChangePassword" id="changePass" class="mb-3">
-                                            Change Your Password
+                                            @lang('change_y_passwd')
 
                                         </label>
                                         <div class="p-3" id="container_password">
                                             <div class="form-group form-default form-static-label">
                                                 <input type="password" name="password_current" class="form-control">
                                                 <span class="form-bar"></span>
-                                                <label class="float-label">Current Password</label>
+                                                <label class="float-label">@lang('current') @lang('password')</label>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6 form-group form-default form-static-label">
                                                     <input type="password" name="password" class="pass form-control">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label pl-3">New Password</label>
+                                                    <label class="float-label pl-3">@lang('new') @lang('password')</label>
                                                 </div>
                                                 <div class="col-6 form-group form-default form-static-label">
                                                     <input type="password" name="password_confirm" class="pass form-control">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label pl-3">Confirm Password</label>
+                                                    <label class="float-label pl-3">@lang('confirm_passwd')</label>
                                                 </div>
                                             </div>
                                         </div>
                                         @endif
-                                        <input type="submit" class="float-right btn btn-primary waves-effect waves-light" value="Update">
+                                        <input type="submit" class="float-right btn btn-primary waves-effect waves-light" value="@lang('update')">
                                     </form>
                                 </div>
                             </div>

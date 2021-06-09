@@ -6,8 +6,8 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10 title-main">@lang('Dashboard')</h5>
-                        <p class="m-b-0">@lang('Welcome')</p>
+                        <h5 class="m-b-10 title-main">@lang('dashboard')</h5>
+                        <p class="m-b-0">@lang('welcome')</p>
                     </div>
                 </div>
             </div>
@@ -52,18 +52,18 @@
                                             @if($lesson->id == $userLesson->lesson_id)
                                                 @if($userLesson->status == 0)
                                                 <div class="label-main">
-                                                    <label class="label label-danger">@lang('Unfinished')</label>
+                                                    <label class="label label-danger">@lang('unfinished')</label>
                                                 </div>
                                                 @else
                                                     <div class="label-main">
-                                                        <label class="label label-success">@lang('Result'): {{ $userLesson->result_string }}</label>
+                                                        <label class="label label-success">@lang('result'): {{ $userLesson->result_string }}</label>
                                                     </div>
                                                 @endif
                                             @endif
                                         @endif
                                     </li>
                                     <li class="float-right">
-                                        <label class="label label-info"><a href="{{ route('lesson.start', $lesson->id) }}">@lang('Start')</a></label>
+                                        <label class="label label-info"><a href="{{ route('lesson.start', $lesson->id) }}">@lang('start')</a></label>
                                     </li>
                                 </ul>
                             </div>
