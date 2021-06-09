@@ -52,6 +52,10 @@
     "FilterType": "Filter words by word type",
     "FilterLearned": "Filter words by learned",
     "FilterUnlearned": "Filter words by unlearned",
+    "NewCourse": "New Course",
+    "EditCourse": "Edit Course",
+    "NewLesson": "New Lesson",
+    "EditLesson": "Edit Lesson",
     "error":{
         "500" : "Server is experiencing problems, Please come back later"
     }
