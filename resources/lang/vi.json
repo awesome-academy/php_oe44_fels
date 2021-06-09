@@ -52,6 +52,10 @@
     "FilterType": "Lọc từ theo loại từ",
     "FilterLearned": "Lọc các từ đã học",
     "FilterUnlearned": "Lọc các từ chưa học",
+    "NewCourse": "Thêm khóa học",
+    "EditCourse": "Chỉnh sửa khóa học",
+    "NewLesson": "Thêm bài học",
+    "EditLesson": "Chỉnh sửa bài học",
     "error" :{
         "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
     }
