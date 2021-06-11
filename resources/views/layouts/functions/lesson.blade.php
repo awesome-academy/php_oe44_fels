@@ -6,8 +6,8 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10 title-main">@lang('Dashboard')</h5>
-                        <p class="m-b-0">@lang('Welcome')</p>
+                        <h5 class="m-b-10 title-main">@lang('dashboard')</h5>
+                        <p class="m-b-0">@lang('welcome')</p>
                     </div>
                 </div>
             </div>
@@ -47,16 +47,16 @@
                     </div>
                     <hr>
                     <div id="tools-voice" class="bg-info">
-                        <p>@lang('Voice')</p>
+                        <p>@lang('voice')</p>
                         <select id="voices" class="form-select bg-secondary text-light"></select>
                         <!-- Range Slliders for Volume, Rate & Pitch -->
                         <div class="ml-3">
-                            <p class="pl-0">@lang('Volume')</p>
+                            <p class="pl-0">@lang('volume')</p>
                             <input type="range" min="0" max="1" value="1" step="0.1" id="volume" />
                             <span id="volume-label" class="ms-2">1</span>
                         </div>
                         <div class="ml-3">
-                            <p class="pl-0">@lang('Rate')</p>
+                            <p class="pl-0">@lang('rate')</p>
                             <input type="range" min="0.1" max="1.5" value="1" id="rate" step="0.1" />
                             <span id="rate-label" class="ms-2">1</span>
                         </div>
@@ -80,7 +80,7 @@
                                             <table class="table ">
                                                 <tbody>
                                                     <tr>
-                                                        <th class="align-middle"><span class="m-0 text-right"> @lang('Vocabulary') : </span></th>
+                                                        <th class="align-middle"><span class="m-0 text-right"> @lang('vocabulary') : </span></th>
                                                         <td class="align-middle font-weight-bold text-capitalize txt-vocabulary" id="{{ $word->vocabulary }}">{{ $word->vocabulary }}</td>
                                                         <td class="align-middle">@foreach($data['categories'] as $cate)
                                                             @if($cate->id == $word->category_id)
@@ -100,11 +100,11 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="align-middle"><span class="m-0 text-right"> @lang('Spelling') : </span></th>
+                                                        <th class="align-middle"><span class="m-0 text-right"> @lang('spelling') : </span></th>
                                                         <td>{{ '/'. $word->spelling .'/'}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="align-middle"><span class="m-0 text-right txt-translate"> @lang('Translate') : </span></th>
+                                                        <th class="align-middle"><span class="m-0 text-right txt-translate"> @lang('translate') : </span></th>
                                                         <td>{{ $word->translate }}</td>
                                                     </tr>
                                                 </tbody>
@@ -138,15 +138,15 @@
                                         <label class="d-block option{{ $question->id }}" for="option_3{{ $question->id }}">
                                             <input type="radio" id="option_3{{ $question->id }}" name="options{{ $question->id }}" value="{{ $options[2] }}"> {{ $options[2] }}</label>
                                     </form>
-                                    <button id="checkAnswer{{ $question->id }}" onclick='checkAnswer("{{ $question->id }}")' class="checks btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('ShowResult')</button>
+                                    <button id="checkAnswer{{ $question->id }}" onclick='checkAnswer("{{ $question->id }}")' class="checks btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('show_result')</button>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
                 </div>
-                <button id="done-questions" onclick="saveResult()" class="btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('Submit')</button>
-                <button id="next-vocabulary" class="btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('Next')</button>
+                <button id="done-questions" onclick="saveResult()" class="btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('submit')</button>
+                <button id="next-vocabulary" class="btn btn-out-dotted waves-effect waves-light btn-info btn-square">@lang('next')</button>
             </div>
         </div>
     </div>

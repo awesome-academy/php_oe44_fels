@@ -6,7 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="page-header-title">
-                        <h5 class="m-b-10 title-main">@lang('OtherCourses')</h5>
+                        <h5 class="m-b-10 title-main">@lang('other_courses')</h5>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
             <div class="page-wrapper">
                 <!-- Page-body start -->
                 <div class="page-body">
-                    <h5 class="text-dark">@lang('CoursesOfTopicUlike')</h5>
+                    <h5 class="text-dark">@lang('courses_of_topic_ulike')</h5>
                     <hr>
                     <div class="row">
                         @php

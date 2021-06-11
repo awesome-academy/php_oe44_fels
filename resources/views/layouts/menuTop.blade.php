@@ -82,23 +82,23 @@
                                 <div class="form-group form-primary">
                                     <input type="text" name="footer-email" class="form-control" required="">
                                     <span class="form-bar"></span>
-                                    <label class="float-label"><i class="fa fa-search m-r-10"></i>@lang('Search')</label>
+                                    <label class="float-label"><i class="fa fa-search m-r-10"></i>@lang('search')</label>
                                 </div>
                             </form>
                         </div>
-                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('Catalog')</div>
+                        <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('catalog')</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li>
-                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                <a href="{{ route('courses.index') }}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('Courses')</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('courses')</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
                             <li>
                                 <a href="bs-basic-table.html" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('Lessons')</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('lessons')</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -171,7 +171,7 @@
                                     <ul class="show-notification profile-notification">
                                         <li class="waves-effect waves-light">
                                             <a href="{{route('user.profile')}}">
-                                                <i class="ti-user"></i> @lang('Profile')
+                                                <i class="ti-user"></i> @lang('profile')
                                             </a>
                                         </li>
                                         <li class="waves-effect waves-light">
@@ -212,9 +212,9 @@
                                     <div class="main-menu-content">
                                         <ul>
                                             <li class="more-details">
-                                                <a href="{{route('user.profile')}}"><i class="ti-user"></i>@lang('Profile')</a>
+                                                <a href="{{route('user.profile')}}"><i class="ti-user"></i>@lang('profile')</a>
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="ti-layout-sidebar-left"></i>@lang('Logout')</a>
+                                                     document.getElementById('logout-form').submit();"><i class="ti-layout-sidebar-left"></i>@lang('logout')</a>
                                                 <form action="{{ route('logout') }}" method="POST" class="d-none">
                                                     @csrf
                                                 </form>
@@ -227,30 +227,30 @@
                                         <div class="form-group form-primary">
                                             <input type="text" name="footer-email" class="form-control" required="">
                                             <span class="form-bar"></span>
-                                            <label class="float-label"><i class="fa fa-search m-r-10"></i>@lang('Search')</label>
+                                            <label class="float-label"><i class="fa fa-search m-r-10"></i>@lang('search')</label>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('Catalog')</div>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('catalog')</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li>
                                         <a href="{{route('home')}}" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('Dashboard')</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('dashboard')</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('other.courses')}}" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('OtherCourses')</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('other_courses')</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{route('words')}}" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('ListWord')</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">@lang('list_word')</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
