@@ -59,13 +59,19 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
+                            @if(str_contains($_SERVER['REQUEST_URI'], 'admin'))
+                            <a class="nav-link" href="{{ route('admin.login') }}">@lang('Login')</a>
+                            @else
                             <a class="nav-link" href="{{ route('login') }}">@lang('Login')</a>
+                            @endif
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
+                            @if(!str_contains($_SERVER['REQUEST_URI'], 'admin'))
                             <a class="nav-link" href="{{ route('register') }}">@lang('Register')</a>
+                            @endif
                         </li>
                         @endif
                         @else

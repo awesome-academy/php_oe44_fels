@@ -22,7 +22,6 @@ class CourseController extends Controller
             $course_topic = DB::table('courses')->where('topic_id', '=', $item)->get();
             array_push($listCourseByTopic,$course_topic);
         }
-        
         return view('layouts.functions.seeOtherCourse', compact(['listCourseByTopic', 'topics', 'user_course']));
     }
 }
