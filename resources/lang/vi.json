@@ -35,6 +35,7 @@
     "courses" : "Các khóa học",
     "course": "Khóa học",
     "lessons" : "Các bài học",
+    "categories" : "Các thể loại từ",
     "lesson" : "Bài học",
     "start": "Bắt đầu",
     "lesson_not_exist": "Bài học này không có trong danh sách các khóa học của bạn",
@@ -62,6 +63,9 @@
     "edit_course": "Chỉnh sửa khóa học",
     "new_lesson": "Thêm bài học",
     "edit_lesson": "Chỉnh sửa bài học",
+    "edit_word": "Chỉnh sửa từ vựng",
+    "edit_category": "Chỉnh sửa thể loại",
+    "name_category": "Tên Thể loại",
     "name_course": "Tên khóa học",
     "topic_of_course": "Chủ đề của khóa học",
     "name_lesson": "Tên bài học",
@@ -101,6 +105,13 @@
     "update_success_word": "Chỉnh sửa từ vựng thành công",
     "delete_faile_word": "Xóa từ vựng Thất bại",
     "delete_success_word": "Xóa từ vựng thành công",
+
+    "insert_fail_category": "Thêm loại từ Thất bại",
+    "insert_success_category": "Thêm loại từ thành công",
+    "update_faile_category": "Chỉnh sửa loại từ Thất bại",
+    "update_success_category": "Chỉnh sửa loại từ thành công",
+    "delete_faile_category": "Xóa loại từ Thất bại",
+    "delete_success_category": "Xóa loại từ thành công",
     "error" :{
         "500" : "Máy chủ đang gặp sự cố, vui lòng quay lại sau"
     }
