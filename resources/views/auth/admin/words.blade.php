@@ -39,19 +39,19 @@
                             @csrf
                             <div class="form-group mb-2">
                                 <label class="mb-2 " for="">@lang('vocabulary')</label>
-                                <input type="text" class="form-control" id="name" name="vocabulary" placeholder='@lang("enter") @lang("vocabulary")'>
+                                <input type="text" class="form-control" name="vocabulary" placeholder='@lang("enter") @lang("vocabulary")'>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="mb-2 " for="">@lang('translate')</label>
-                                <input type="text" class="form-control" id="name" name="translate" placeholder='@lang("enter") @lang("translate")'>
+                                <input type="text" class="form-control" name="translate" placeholder='@lang("enter") @lang("translate")'>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="mb-2 " for="">@lang('spelling')</label>
-                                <input type="text" class="form-control" id="name" name="spelling" placeholder='@lang("enter") @lang("spelling")'>
+                                <input type="text" class="form-control" name="spelling" placeholder='@lang("enter") @lang("spelling")'>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="mb-2 " for="">@lang('category_name')</label>
-                                <select id="" name="category_id" class="form-control">
+                                <select name="category_id" class="form-control">
                                     @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -115,7 +115,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-form-label">@lang('category_name'):</label>
-                                                            <select id="" name="category_id" class="form-control">
+                                                            <select name="category_id" class="form-control">
                                                                 @foreach($categories as $cate)
                                                                 @if($item->category_id == $cate->id)
                                                                 <option selected value="{{ $cate->id }}">{{ $cate->name }}</option>

@@ -12,6 +12,9 @@
 - [#36553](https://edu-redmine.sun-asterisk.vn/issues/36553)
 - [#36556](https://edu-redmine.sun-asterisk.vn/issues/36556)
 - [#36558](https://edu-redmine.sun-asterisk.vn/issues/36558)
+- [#36566](https://edu-redmine.sun-asterisk.vn/issues/36566)
+- [#36564](https://edu-redmine.sun-asterisk.vn/issues/36564)
+
 
 ## WHAT this PR does?
 - Init Model and relationship
@@ -23,6 +26,7 @@
 - Filter Word List
 - CRUD Course
 - CRUD Word
+- CRUD Lesson
 <!--
 - ex: Change number items `completed/total` in admin page.
 -->
