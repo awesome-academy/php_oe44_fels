@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/user_topic/insert', [UserTopicController::class, 'insert'])->name('user_topic.insert');
     Route::post('/user_course/insert/{course_id}', [UserCourseController::class, 'insert'])->name('user_course.insert');
-    Route::get('/other-courses', [CourseController::class, 'index'])->name('other.courses');
+    Route::get('/other_courses', [CourseController::class, 'index'])->name('other.courses');
 
     Route::match(['GET', 'PATCH'], '/user/profile', [UserController::class, 'index'])->name('user.profile');
 });

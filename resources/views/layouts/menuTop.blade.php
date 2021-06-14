@@ -96,9 +96,16 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                <a href="{{ route('lessons.index') }}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('lessons')</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('words.index') }}" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('words')</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>

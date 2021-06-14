@@ -11,6 +11,7 @@
 - [#36555](https://edu-redmine.sun-asterisk.vn/issues/36555)
 - [#36553](https://edu-redmine.sun-asterisk.vn/issues/36553)
 - [#36556](https://edu-redmine.sun-asterisk.vn/issues/36556)
+- [#36558](https://edu-redmine.sun-asterisk.vn/issues/36558)
 
 ## WHAT this PR does?
 - Init Model and relationship
@@ -21,6 +22,7 @@
 - Handling lesson logic
 - Filter Word List
 - CRUD Course
+- CRUD Word
 <!--
 - ex: Change number items `completed/total` in admin page.
 -->

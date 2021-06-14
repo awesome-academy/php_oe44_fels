@@ -19,7 +19,8 @@ class CreateWordsTable extends Migration
             $table->text('spelling');
             $table->text('translate');
             $table->integer('category_id');
-            $table->integer('lesson_id');
+            $table->integer('lesson_id')->nullable();
+            $table->string('range_questions')->nullable();
             $table->timestamps();
         });
     }

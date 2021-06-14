@@ -6,8 +6,8 @@
       <div class="row align-items-center">
         <div class="col-md-8">
           <div class="page-header-title">
-            <h5 class="m-b-10 title-main">@lang('Dashboard')</h5>
-            <p class="m-b-0">@lang('Welcome')</p>
+            <h5 class="m-b-10 title-main">@lang('dashboard')</h5>
+            <p class="m-b-0">@lang('welcome')</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -15,7 +15,7 @@
             <li class="breadcrumb-item">
               <a href="index.html"> <i class="fa fa-home"></i> </a>
             </li>
-            <li class="breadcrumb-item"><a href="#!">@lang('Dashboard')</a>
+            <li class="breadcrumb-item"><a href="#!">@lang('dashboard')</a>
             </li>
           </ul>
         </div>
@@ -38,7 +38,7 @@
             <!-- task, page, download counter  start -->
             <form action="{{route('user_topic.insert')}}" method="post">
               @csrf
-              <h2>@lang('WhatTopicLike')</h2>
+              <h2>@lang('what_topic_ulike')</h2>
               <div class="row m-t-25 text-left">
 
                 @foreach($topics as $topic)
@@ -54,18 +54,18 @@
                 @endforeach
 
               </div>
-              <button type="submit" class="btn btn-primary waves-effect waves-light">@lang('Next')</button>
+              <button type="submit" class="btn btn-primary waves-effect waves-light">@lang('next')</button>
             </form>
           </div>
         </div>
 
         @else
         <div class="page-body">
-          <h5 class="text-dark">@lang('RegisteredCourses')</h5>
+          <h5 class="text-dark">@lang('registered_courses')</h5>
           <hr>
 
           @if(count($listMyCourse) == 0)
-          <p class="text-center w-100"> @lang('noCourseExist') <a class="text-danger" href="{{route('other.courses')}}">[@lang('viewCourses')]</a></p>
+          <p class="text-center w-100"> @lang('no_course_exist') <a class="text-danger" href="{{route('other.courses')}}">[@lang('view_courses')]</a></p>
           @else
 
           @foreach($listMyCourse as $items)
@@ -94,7 +94,7 @@
 
                     </a>
                   </li>
-                  <li class="float-right"><a href="{{ route('lessons', $value->id) }}">@lang('LearnNow')</a>
+                  <li class="float-right"><a href="{{ route('lessons', $value->id) }}">@lang('learn_now')</a>
                   </li>
                 </ul>
               </div>
