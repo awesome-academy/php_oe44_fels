@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Admin\Auth\AdminController;
+use App\Http\Controllers\Auth\Admin\CategoryAdminController;
 use App\Http\Controllers\Auth\Admin\CourseAdminController;
 use App\Http\Controllers\Auth\Admin\LessonAdminController;
 use App\Http\Controllers\Auth\Admin\WordAdminController;
@@ -17,4 +18,5 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('/lessons', LessonAdminController::class);
     Route::post('lessons/removeWord/{id_lesson}', [LessonAdminController::class, 'removeWord'])->name('lessons.removeWord');
     Route::resource('/words', WordAdminController::class);
+    Route::resource('/categories', CategoryAdminController::class);
 });

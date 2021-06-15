@@ -36,6 +36,7 @@
     "course": "Course",
     "lessons": "Lessons",
     "lesson": "Lesson",
+    "categories" : "Categories",
     "start": "Start",
     "lesson_not_exist": "This lesson is not on your list of courses",
     "unfinished": "Unfinished",
@@ -62,8 +63,11 @@
     "edit_course": "Edit Course",
     "new_lesson": "New Lesson",
     "edit_lesson": "Edit Lesson",
+    "edit_category": "Edit Category",
+    "edit_word": "Edit Word",
     "add": "Add",
     "id": "ID",
+    "name_category": "Name Category",
     "name_course": "Name Course",
     "topic_of_course": "Course Of Lesson",
     "name_lesson": "Name Lesson",
@@ -101,6 +105,13 @@
     "update_success_word": "Update Success Word",
     "delete_faile_word": "Delete Fail Word",
     "delete_success_word": "Delete Success Word",
+
+    "insert_fail_category": "Insert Fail Category",
+    "insert_success_category": "Insert Success Category",
+    "update_faile_category": "Update Faild Category",
+    "update_success_category": "Update Success Category",
+    "delete_faile_category": "Delete Fail Category",
+    "delete_success_category": "Delete Success Category",
     "error":{
         "500" : "Server is experiencing problems, Please come back later"
     }

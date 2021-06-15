@@ -8,4 +8,5 @@ return [
     'filter_by_unlearned' => 4,
     'paginate_course' => 4,
     'paginate_lesson' => 5,
+    'paginate_category' => 4,
 ];
