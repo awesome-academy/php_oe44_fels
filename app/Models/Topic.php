@@ -9,6 +9,10 @@ class Topic extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class,'user_topics')->withTimestamps();
