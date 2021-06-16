@@ -8,21 +8,18 @@ use App\Models\Topic;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class CourseAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
-        $courses = Course::simplePaginate(Config::get('variable.paginate_course'));
+        $courses = Course::paginate(Config::get('variable.paginate_course'));
         $topics = Topic::all();
 
-        return view('auth.admin.courses', compact(['courses','topics']));
+        return view('auth.admin.courses', compact(['courses', 'topics']));
     }
 
     /**
@@ -43,16 +40,14 @@ class CourseAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $course =  new Course();
-        $course->name = $request->get('name');
-        $course->described = $request->get('described');
-        $course->topic_id = $request->get('topic_id');
-        if (!$course->save()) {
+        try {
+            Course::create($request->all());
+        } catch (\Throwable $th) {
 
-            return back()->withInput()->with('status', trans('insert_fail_course'));
+            return redirect()->route('courses.index')->with('status', trans('insert_fail_course'));
         }
-        
-        return back()->withInput()->with('status', trans('insert_success_course'));
+
+        return redirect()->route('courses.index')->with('status', trans('insert_success_course'));
     }
 
     /**
@@ -84,20 +79,16 @@ class CourseAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        $course = Course::find($id);
-        $course->name = $request->get('name');
-        $course->topic_id = $request->get('topic_id');
-        $course->described = $request->get('described');
+        try {
+            $course->update($request->all());
+        } catch (\Throwable $th) {
 
-        if (!$course->save()) {
-
-            return back()->withInput()->with('status', trans('update_faile_course'));
+            return redirect()->route('courses.index')->with('status', trans('update_fail_course'));
         }
-        
-        return back()->withInput()->with('status', trans('update_success_course'));
 
+        return redirect()->route('courses.index')->with('status', trans('update_success_course'));
     }
 
     /**
@@ -106,15 +97,15 @@ class CourseAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        $course = Course::find($id);
-        if (!$course->delete()) {
+        try {
+            $course->delete();
+        } catch (\Throwable $th) {
 
-            return back()->withInput()->with('status', trans('delete_faile_course'));
+            return redirect()->route('courses.index')->with('status', trans('delete_fail_course'));
         }
-        
-        return back()->withInput()->with('status', trans('delete_success_course'));
 
+        return redirect()->route('courses.index')->with('status', trans('delete_success_course'));
     }
 }
