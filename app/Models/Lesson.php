@@ -9,6 +9,12 @@ class Lesson extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        'name',
+        'described',
+        'course_id',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class,'user_lessons')->withTimestamps();

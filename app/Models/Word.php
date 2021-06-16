@@ -9,6 +9,14 @@ class Word extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'vocabulary',
+        'translate',
+        'spelling',
+        'category_id',
+        'lesson_id',
+    ];
+
     public function lessons()
     {
         return $this->belongsTo(Lesson::class);
