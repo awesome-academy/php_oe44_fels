@@ -4,6 +4,8 @@ namespace Tests\Unit\Controllers;
 
 use App\Http\Controllers\Auth\Admin\CourseAdminController;
 use App\Models\Course;
+use App\Repositories\Course\CourseRepository;
+use App\Repositories\Topic\TopicRepository;
 use Tests\TestCase;
 use Mockery as m;
 use Illuminate\Database\Connection;
@@ -19,6 +21,7 @@ class CourseControllerTest extends TestCase
 
     public function setUp(): void
     {
+        $this->controller = new CourseAdminController(new CourseRepository, new TopicRepository);
         $this->afterApplicationCreated(function () {
             $this->db = m::mock(
                 Connection::class . '[select,update,insert,delete]',
@@ -43,7 +46,6 @@ class CourseControllerTest extends TestCase
 
     public function test_index_returns_view()
     {
-        $controller = new CourseAdminController();
         $this->db->shouldReceive('select')->once()->withArgs([
             'select count(*) as aggregate from "courses"',
             [],
@@ -56,7 +58,7 @@ class CourseControllerTest extends TestCase
             m::any(),
         ])->andReturn(true);
 
-        $view = $controller->index();
+        $view = $this->controller->index();
         
         $this->assertEquals('auth.admin.courses', $view->getName());
         $this->assertArrayHasKey('courses', $view->getData());
@@ -65,8 +67,6 @@ class CourseControllerTest extends TestCase
 
     public function test_it_stores_new_course_success()
     {
-        $controller = new CourseAdminController();
-
         $data = [
             'name' => 'Family',
             'described' => 'Nothing...',
@@ -88,7 +88,7 @@ class CourseControllerTest extends TestCase
             ])->andReturn(true);
 
         /** @var RedirectResponse $response */
-        $response = $controller->store($request);
+        $response = $this->controller->store($request);
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('courses.index'), $response->headers->get('Location'));
@@ -97,8 +97,6 @@ class CourseControllerTest extends TestCase
 
     public function test_it_stores_new_course_fail()
     {
-        $controller = new CourseAdminController();
-
         $data = [
             'name' => 'Family',
             'described' => 'Nothing...',
@@ -123,7 +121,7 @@ class CourseControllerTest extends TestCase
             });
 
         /** @var RedirectResponse $response */
-        $response = $controller->store($request);
+        $response = $this->controller->store($request);
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('courses.index'), $response->headers->get('Location'));
@@ -132,8 +130,6 @@ class CourseControllerTest extends TestCase
 
     public function test_update_existing_course_success()
     {
-        $controller = new CourseAdminController();
-
         $data = [
             'id' => 1,
             'name' => 'new name',
@@ -153,7 +149,7 @@ class CourseControllerTest extends TestCase
             }
         )])->andReturn(true);
 
-        $response = $controller->update($request, $course);
+        $response = $this->controller->update($course, $request);
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('courses.index'), $response->headers->get('Location'));
@@ -162,8 +158,6 @@ class CourseControllerTest extends TestCase
 
     public function test_update_existing_course_fail()
     {
-        $controller = new CourseAdminController();
-
         $data = [
             'id' => 1,
             'name' => 'new name',
@@ -181,9 +175,9 @@ class CourseControllerTest extends TestCase
             m::on(function($arg) {
                 return is_array($arg);
             }
-        )])->andThrow(new QueryException('', [], new \Exception));
+        )])->andReturn(false);
 
-        $response = $controller->update($request, $course);
+        $response = $this->controller->update($course, $request);
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('courses.index'), $response->headers->get('Location'));
@@ -192,8 +186,6 @@ class CourseControllerTest extends TestCase
     
     public function test_destroy_existing_course()
     {
-        $controller = new CourseAdminController();
-
         $data = [
             'id' => 1,
             'name' => 'Family',
@@ -205,7 +197,7 @@ class CourseControllerTest extends TestCase
 
         $this->courseMock->shouldReceive('delete')->once()->andReturn(true);
 
-        $response = $controller->destroy($course);
+        $response = $this->controller->destroy($course);
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('courses.index'), $response->headers->get('Location'));
