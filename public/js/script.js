@@ -1,26 +1,30 @@
 "use strict";
 $(document).ready(function () {
 
-    
-
     $("#filter").change(function () {
         var valueFilter = $("#filter option:selected").val();
         $.ajax({
-            url: "http://localhost:8000/api/words/" + valueFilter,
+            url: "http://"+window.location.host+"/api/words/" + valueFilter,
             method: 'GET',
             success: function (e) {
-                console.log(JSON.parse(e));
-                var dataWords = JSON.parse(e);
                 $('#wordElements').empty();
-                for (let index = 0; index < dataWords.length; index++) {
-                    const element = dataWords[index];
-                    if(index > 0 && valueFilter == 2 && element['category_id'] != elementOld['category_id']){
-                        $('#wordElements').append('<hr class="between">');
-                    }
-                    var el= '<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right"> '+ (index+1) +' </span><h4 class="text-c-purple">'+ element['vocabulary'] +'<span class="font-italic category"> ('+ element['category_name'] +')</span></h4><h6 class="text-muted m-b-0">'+ element['translate'] +'</h6></div></div></div></div></div>';
-                    $('#wordElements').append(el);
-                    var elementOld = element;
-                };
+                let data = e['data'];
+                var index = 1;
+                let elementOld;
+                if(data.length){
+                    for (let element of data) {
+                        if(index > 1 && valueFilter == 2 && element['category_id'] != elementOld['category_id']){
+                            $('#wordElements').append('<hr class="between">');
+                        }
+                        let el= `<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right">${index}</span><h4 class="text-c-purple">${element['vocabulary']}<span class="font-italic category"> (${element['category_name']})</span></h4><h6 class="text-muted m-b-0">${element['translate']}</h6></div></div></div></div></div>`;
+                        $('#wordElements').append(el);
+                        elementOld = element;
+                        index++;
+                    };
+                }
+                else{
+                    $('#wordElements').append('<span>Nothing...</span>');
+                }
             }
         });
     }).change();
@@ -329,7 +333,7 @@ function checkAnswer(idQuestion) {
         }
         else {
             $.ajax({
-                url: "http://localhost:8000/api/questions/check",
+                url: "http://"+window.location.host+"/api/questions/check",
                 method: 'POST',
                 data: {
                     id: idQuestion,
@@ -374,7 +378,7 @@ function saveResult() {
     setTimeout(function () {
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost:8000/api/user/lesson/result",
+                url: "http://"+window.location.host+"/api/user/lesson/result",
                 method: 'POST',
                 data: {
                     result: resultAnswer,
@@ -383,7 +387,7 @@ function saveResult() {
                     resultAccepts, resultAccepts,
                 },
                 success: function (e) {
-                    window.location.replace("http://localhost:8000/lessons/" + e);
+                    window.location.replace("http://"+window.location.host+"/lessons/" + e);
                 }
             });
         });

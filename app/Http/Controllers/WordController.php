@@ -39,7 +39,9 @@ class WordController extends Controller
                 return $value['vocabulary'];
             }));
 
-            return json_encode($dataFilterAlphabet);
+            return [
+                'data' => $dataFilterAlphabet,
+            ];
             
         } else if ($option == Config::get('variable.filter_by_type')) {  // show filter type
             $dataFilterCategory = array_values(Arr::sort($data, function ($value) {
@@ -47,7 +49,9 @@ class WordController extends Controller
                 return $value['category_id'];
             }));
 
-            return json_encode($dataFilterCategory);
+            return [
+                'data' => $dataFilterCategory,
+            ];
 
         } else if ($option == Config::get('variable.filter_by_learned')) { // show filter learned
             $dataFilterLearned = Auth::user()->learned_word_list;
@@ -63,7 +67,9 @@ class WordController extends Controller
                 }
             }
 
-            return json_encode($dataWordsLearned);
+            return [
+                'data' => $dataWordsLearned,
+            ];
             
         } else if ($option == Config::get('variable.filter_by_unlearned')) { // show filter unlearned
             $dataFilterLearned = Auth::user()->learned_word_list;
@@ -76,11 +82,15 @@ class WordController extends Controller
                 }
             }
 
-            return json_encode($dataWordsUnLearned);
+            return [
+                'data' => $dataWordsUnLearned,
+            ];
 
         } else { // show all
 
-            return json_encode($data);
+            return [
+                'data' => $data,
+            ];
         }
     }
 }

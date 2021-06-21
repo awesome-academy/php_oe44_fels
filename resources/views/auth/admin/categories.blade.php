@@ -117,7 +117,7 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-center">
-                        {!! $categories->links() !!}
+                        {!! $categories->links("pagination::bootstrap-4") !!}
                     </div>
                 </div>
             </div>
