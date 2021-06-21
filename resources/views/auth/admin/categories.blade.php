@@ -62,10 +62,11 @@
                         <tbody>
                             @foreach($categories as $item)
                             <tr>
-                                <th scope="row">{{$item->id}}</th>
+                                <th scope="row">{{$item->id}}
+                                </th>
                                 <td>{{$item->name}}</td>
                                 <td>{{ \Illuminate\Support\Str::limit($item->described, 50, $end='...') }}</td>
-                                <td>
+                                <td> 
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$item->id}}">@lang('edit')</button>
                                     <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -76,7 +77,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('categories.update',$item->id)}}" method="POST">
+                                                <form action="{{ route('categories.update', $item)}}" method="POST">
                                                     @csrf
                                                     @method('PATCH')
                                                     <div class="modal-body">
@@ -99,7 +100,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form action="{{ route('categories.destroy',$item->id)}}" method="POST">
+                                    <form action="{{ route('categories.destroy', $item)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger text-white">

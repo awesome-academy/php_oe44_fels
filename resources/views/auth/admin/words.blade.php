@@ -97,7 +97,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('words.update',$item->id)}}" method="POST">
+                                                <form action="{{ route('words.update', $item)}}" method="POST">
                                                     @csrf
                                                     @method('PATCH')
                                                     <div class="modal-body">
@@ -136,7 +136,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form action="{{ route('words.destroy',$item->id)}}" method="POST">
+                                    <form action="{{ route('words.destroy', $item)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger text-white">
