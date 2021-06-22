@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Course;
 use App\Models\Lesson;
-use App\Models\Topic;
-use App\Models\Word;
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Course\CourseRepository;
+use App\Repositories\Lesson\LessonRepository;
+use App\Repositories\Topic\TopicRepository;
+use App\Repositories\Word\WordRepository;
 use Dotenv\Parser\Lexer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,24 +16,40 @@ use Illuminate\Support\Facades\Config;
 
 class LessonAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $courseRepo;
+    protected $lessonRepo;
+    protected $wordRepo;
+    protected $categoryRepo;
+    protected $topicRepo;
+
+    public function __construct(
+        CourseRepository $courseRepo,
+        LessonRepository $lessonRepo,
+        WordRepository $wordRepo,
+        CategoryRepository $categoryRepo,
+        TopicRepository $topicRepo
+    ) {
+        $this->courseRepo = $courseRepo;
+        $this->lessonRepo = $lessonRepo;
+        $this->wordRepo = $wordRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->topicRepo = $topicRepo;
+    }
+
     public function index()
     {
-        $lessons = Lesson::simplePaginate(Config::get('variable.paginate_lesson'));
-        $courses = Course::all();
-        $words = Word::orderBy('vocabulary', 'asc')->get();
+        $lessons = $this->lessonRepo->getByPaginate(Config::get('variable.paginate_lesson'));
+        $courses = $this->courseRepo->getAll();
+        $words = $this->wordRepo->getOrderBy('vocabulary', 'asc');
 
         foreach ($words as $word) {
-            $word->category_name = Category::find($word->category_id)->name;
+            $word->category_name = $this->categoryRepo->find($word->category_id)->name;
         }
 
         foreach ($courses as $course) {
-            $course->topic_name = Topic::find($course->topic_id)->name;
+            $course->topic_name = $this->topicRepo->find($course->topic_id)->name;
         }
+
         return view('auth.admin.lessons', compact('lessons', 'courses', 'words'));
     }
 
@@ -55,25 +72,21 @@ class LessonAdminController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $lesson = new Lesson();
-        $lesson->name = $data['name'];
-        $lesson->described = $data['described'];
-        $lesson->course_id = $data['course_id'];
+        $requestLesson = ['name' => $data['name'], 'described' => $data['described'], 'course_id' => $data['course_id']];
+        try {
+            $lesson = $this->lessonRepo->create($requestLesson);
 
-        if (!$lesson->save()) {
-
-            return back()->withInput()->with('status', trans('insert_fail_lesson'));
-        }
-
-        foreach ($data as $key => $value) {
-            if (Str::contains($key, 'option')) {
-                $word = Word::find($value);
-                $word->lesson_id = $lesson->id;
-                $word->save();
+            foreach ($data as $key => $value) {
+                if (Str::contains($key, 'option')) {
+                    $this->wordRepo->setColumnLessonID($value, $lesson->id);
+                }
             }
-        }
+    
+            return redirect()->route('lessons.index')->with('status', trans('insert_success_lesson'));
+        } catch (\Throwable $th) {
 
-        return back()->withInput()->with('status', trans('insert_success_lesson'));
+            return redirect()->route('lessons.index')->with('status', trans('insert_fail_lesson'));
+        }
     }
 
     /**
@@ -105,39 +118,30 @@ class LessonAdminController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Lesson $lesson, Request $request)
     {
         $data = $request->all();
-        $lesson = new Lesson();
-        $lesson->name = $data['name'];
-        $lesson->course_id = $data['course_id'];
-        $lesson->described = $data['described'];
-
-        if (!$lesson->save()) {
-
-            return back()->withInput()->with('status', trans('update_faile_lesson'));
-        }
-
-        foreach ($data as $key => $value) {
-            if (Str::contains($key, 'option')) {
-                $word = Word::find($value);
-                $word->lesson_id = $id;
-                $word->save();
+        if ($this->lessonRepo->update($lesson, $data)) {
+            foreach ($data as $key => $value) {
+                if (Str::contains($key, 'option')) {
+                    $this->wordRepo->setColumnLessonID($value, $lesson->id);
+                }
             }
-        }
 
-        return back()->withInput()->with('status', trans('update_success_lesson'));
+            return redirect()->route('lessons.index')->with('status', trans('update_success_lesson'));
+        } else {
+
+            return redirect()->route('lessons.index')->with('status', trans('update_faile_lesson'));
+        }
     }
 
-    public function removeWord(Request $request, $id)
+    public function removeWord(Request $request)
     {
         $data = $request->all();
 
         foreach ($data as $key => $value) {
             if (Str::contains($key, 'option')) {
-                $word = Word::find($value);
-                $word->lesson_id = null;
-                $word->save();
+                $this->wordRepo->setColumnLessonID($value);
             }
         }
 
@@ -150,21 +154,19 @@ class LessonAdminController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Lesson $lesson)
     {
-        $words = Word::where('lesson_id', $id)->get();
-
-        $lesson = Lesson::find($id);
-        if (!$lesson->delete()) {
-
-            return back()->withInput()->with('status', trans('delete_faile_lesson'));
+        $words = $this->wordRepo->getByLessonID($lesson->id);
+        if ($this->lessonRepo->delete($lesson)){
+            foreach($words as $word){
+                $this->wordRepo->setColumnLessonID($word->id);
+            }
+            
+            return redirect()->route('lessons.index')->with('status', trans('delete_success_lesson'));
         }
+        else{
 
-        foreach ($words as $word) {
-            $word->lesson_id = null;
-            $word->save();
+            return redirect()->route('lessons.index')->with('status', trans('delete_fail_lesson'));
         }
-
-        return back()->withInput()->with('status', trans('delete_success_lesson'));
     }
 }

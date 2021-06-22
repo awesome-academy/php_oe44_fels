@@ -236,7 +236,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <form action="{{ route('lessons.destroy', $item->id)}}" method="POST">
+                                    <form action="{{ route('lessons.destroy', $item)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger text-white">
@@ -254,7 +254,7 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-center">
-                        {!! $lessons->links() !!}
+                        {!! $lessons->links("pagination::bootstrap-4") !!}
                     </div>
                 </div>
             </div>

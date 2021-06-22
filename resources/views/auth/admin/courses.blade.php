@@ -86,7 +86,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('courses.update', $item->id)}}" method="POST">
+                                                <form action="{{ route('courses.update', $item)}}" method="POST">
                                                     @csrf
                                                     @method('PATCH')
                                                     <div class="modal-body">

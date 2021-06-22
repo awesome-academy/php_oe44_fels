@@ -10,25 +10,46 @@ use App\Models\Lesson;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Models\Word;
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Course\CourseRepository;
+use App\Repositories\Lesson\LessonRepository;
+use App\Repositories\Topic\TopicRepository;
+use App\Repositories\Word\WordRepository;
 use Illuminate\Http\Request;
 
 class WordAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $courseRepo;
+    protected $lessonRepo;
+    protected $wordRepo;
+    protected $categoryRepo;
+    protected $topicRepo;
+
+    public function __construct(
+        CourseRepository $courseRepo,
+        LessonRepository $lessonRepo,
+        WordRepository $wordRepo,
+        CategoryRepository $categoryRepo,
+        TopicRepository $topicRepo
+    ) {
+        $this->courseRepo = $courseRepo;
+        $this->lessonRepo = $lessonRepo;
+        $this->wordRepo = $wordRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->topicRepo = $topicRepo;
+    }
+
     public function index()
     {
-        $words = Word::orderBy('id', 'desc')->get();
-        foreach($words as $word){
-            $word->category_name = Category::find($word->category_id)->name;
-            $word->lesson_name = $word->lesson_id ? Lesson::find($word->lesson_id)->name : '';
-            $word->course_name = $word->lesson_id ? Course::find(Lesson::find($word->lesson_id)->course_id)->name : '';
-            $word->topic_name = $word->lesson_id ? Topic::find(Course::find(Lesson::find($word->lesson_id)->course_id)->topic_id)->name : '';
+
+        $words = $this->wordRepo->getOrderBy('id', 'desc');
+        foreach ($words as $word) {
+            $word->category_name = $this->categoryRepo->find($word->category_id)->name;
+            $word->lesson_name = $word->lesson_id ? $this->lessonRepo->find($word->lesson_id)->name : '';
+            $word->course_name = $word->lesson_id ? $this->courseRepo->find($this->lessonRepo->find($word->lesson_id)->course_id)->name : '';
+            $word->topic_name = $word->lesson_id ? $this->topicRepo->find($this->courseRepo->find($this->lessonRepo->find($word->lesson_id)->course_id)->topic_id)->name : '';
         }
-        $categories = Category::all();
+        $categories = $this->categoryRepo->getAll();
 
         return view('auth.admin.words', compact(['words', 'categories']));
     }
@@ -51,25 +72,15 @@ class WordAdminController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $word = $this->wordRepo->create($request->all());
+            $this->wordRepo->createQuestionsForWord($word);
 
-        $word =  new Word();
-        $word->vocabulary = $request->get('vocabulary');
-        $word->translate = $request->get('translate');
-        $word->spelling = $request->get('spelling');
-        $word->category_id = $request->get('category_id');
+            return redirect()->route('words.index')->with('status', trans('insert_success_word'));
+        } catch (\Throwable $th) {
 
-        if (!$word->save()) {
-
-            return back()->withInput()->with('status', trans('insert_fail_word'));
+            return redirect()->route('words.index')->with('status', trans('insert_fail_word'));
         }
-        
-        new QuestionsController($word);
-        $endsQuestionsID = Question::count();
-        $range = [$endsQuestionsID, $endsQuestionsID - 1 , $endsQuestionsID - 2];
-        $word->range_questions = implode(',', $range);
-        $word->save();
-
-        return back()->withInput()->with('status', trans('insert_success_word'));
     }
 
     /**
@@ -101,31 +112,19 @@ class WordAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Word $word, Request $request)
     {
-        $word = Word::find($id);
-        $word->vocabulary = $request->get('vocabulary');
-        $word->translate = $request->get('translate');
-        $word->spelling = $request->get('spelling');
-        $word->category_id = $request->get('category_id');
+        if ($this->wordRepo->update($word, $request->all())) {
+            // delete all old questions of this word
+            $this->wordRepo->deleteQuestionsForWord($word);
 
-        if (!$word->save()) {
+            // insert again new questions of this word
+            $this->wordRepo->createQuestionsForWord($word);
 
-            return back()->withInput()->with('status', trans('update_faile_word'));
+            return back()->withInput()->with('status', trans('update_success_word'));
         }
-        // delete all old questions of this word
-        $range_question = explode(',', $word->range_questions);
-        Question::destroy($range_question);
 
-        // insert again new questions of this word
-        new QuestionsController($word);
-        $endsQuestionsID = Question::count();
-        $range = [$endsQuestionsID, $endsQuestionsID - 1 , $endsQuestionsID - 2];
-        $word->range_questions = implode(',', $range);
-        $word->save();
-
-        return back()->withInput()->with('status', trans('update_success_word'));
-
+        return back()->withInput()->with('status', trans('update_faile_word'));
     }
 
     /**
@@ -134,18 +133,16 @@ class WordAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Word $word)
     {
-        $word = Word::find($id);
         $range_question = explode(',', $word->range_questions);
-        if (!$word->delete()) {
+        if ($this->wordRepo->delete($word)) {
+            Question::destroy($range_question);
+
+            return back()->withInput()->with('status', trans('delete_success_course'));
+        } else {
 
             return back()->withInput()->with('status', trans('delete_faile_course'));
         }
-
-        Question::destroy($range_question);
-
-        return back()->withInput()->with('status', trans('delete_success_course'));
-
     }
 }

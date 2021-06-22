@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Auth\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Repositories\Category\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 class CategoryAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $categoryRepo;
+
+    public function __construct(CategoryRepository $categoryRepo)
+    {
+        $this->categoryRepo = $categoryRepo;
+    }
+
     public function index()
     {
-        $categories = Category::simplePaginate(Config::get('variable.paginate_category'));
+        $categories = $this->categoryRepo->getByPaginate(Config::get('variable.paginate_category'));
 
         return view('auth.admin.categories')->with('categories', $categories);
     }
@@ -39,15 +42,14 @@ class CategoryAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $category =  new Category();
-        $category->name = $request->get('name');
-        $category->described = $request->get('described');
-        if (!$category->save()) {
+        try {
+            $this->categoryRepo->create($request->all());
 
-            return back()->withInput()->with('status', trans('insert_fail_category'));
+            return redirect()->route('categories.index')->with('status', trans('insert_success_category'));
+        } catch (\Throwable $th) {
+
+            return redirect()->route('categories.index')->with('status', trans('insert_fail_category'));
         }
-        
-        return back()->withInput()->with('status', trans('insert_success_category'));
     }
 
     /**
@@ -79,18 +81,15 @@ class CategoryAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $cate, Request $request)
     {
-        $category = Category::find($id);
-        $category->name = $request->get('name');
-        $category->described = $request->get('described');
+        if ($this->categoryRepo->update($cate, $request->all())) {
 
-        if (!$category->save()) {
+            return redirect()->route('categories.index')->with('status', trans('update_success_category'));
+        } else {
 
-            return back()->withInput()->with('status', trans('update_faile_category'));
+            return redirect()->route('categories.index')->with('status', trans('update_faile_category'));
         }
-        
-        return back()->withInput()->with('status', trans('update_success_category'));
     }
 
     /**
@@ -99,14 +98,13 @@ class CategoryAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $cate)
     {
-        $category = Category::find($id);
-        if (!$category->delete()) {
+        if ($this->categoryRepo->delete($cate)) {
 
-            return back()->withInput()->with('status', trans('delete_faile_category'));
+            return redirect()->route('categories.index')->with('status', trans('delete_success_category'));
         }
-        
-        return back()->withInput()->with('status', trans('delete_success_category'));
+
+        return redirect()->route('categories.index')->with('status', trans('delete_faile_category'));
     }
 }
