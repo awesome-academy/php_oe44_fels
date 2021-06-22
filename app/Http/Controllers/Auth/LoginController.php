@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\SendAdminNotificationUserRegisted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
@@ -9,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
@@ -98,6 +100,7 @@ class LoginController extends Controller
             $user->provider_id = $data->id;
             $user->avatar = $data->avatar;
             $user->save();
+            event(new SendAdminNotificationUserRegisted($user->email, '', false));
         }
 
         Auth::login($user);

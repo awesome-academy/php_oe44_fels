@@ -6,7 +6,7 @@
         <nav class="navbar header-navbar pcoded-header">
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
-                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse">
                         <i class="ti-menu"></i>
                     </a>
                     <div class="mobile-search waves-effect waves-light">
@@ -49,23 +49,23 @@
                         </li>
                     </ul>
                     <ul class="nav-right">
-                        <a href="{{ route('i18n','vi') }}">VI</a>
-                        <a href="{{ route('i18n','en') }}">EN</a>
-                        <li class="user-profile header-notification">
+                        <li class="user-profile">
                             <a href="#!" class="waves-effect waves-light">
                                 <span>{{ Auth::guard('admin')->user()->name }}</span>
-                                <i class="ti-angle-down"></i>
                             </a>
-                            <ul class="show-notification profile-notification">
-                                <li class="waves-effect waves-light">
-                                    <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="ti-layout-sidebar-left"></i>Logout</a>
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
+                        </li>
+                        <li class="user-profile text-danger">
+                            <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        <li class="user-profile">
+                            <a class="text-success" href="{{ route('i18n','vi') }}">VI</a>
+                        </li>
+                        <li class="user-profile">
+                            <a class="text-success" href="{{ route('i18n','en') }}">EN</a>
                         </li>
                     </ul>
                 </div>
@@ -88,6 +88,27 @@
                         </div>
                         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('catalog')</div>
                         <ul class="pcoded-item pcoded-left-item">
+                            <li>
+                                <a href="#" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('home')</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="header-notification" id="notification-header">
+                                <a href="{{ route('notifications') }}" class="waves-effect waves-light">
+                                    <span class="pcoded-micon">
+                                        <i class="ti-bell"></i>
+                                        <b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('notifications')
+                                        @if (($num_notify_unread = App\Models\Notification::where('is_read', 0)->count()) != 0)
+                                            <label id="ping" data-count="{{ $num_notify_unread }}" class="badge label-danger notif-count label">{{ $num_notify_unread }}</label>
+                                        @else
+                                            <label id="ping" data-count="{{ $num_notify_unread }}" class="notif-count label">{{ $num_notify_unread }}</label>
+                                        @endif
+                                    </span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('courses.index') }}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
@@ -273,3 +294,4 @@
                             </div>
                         </nav>
                         @endif
+                        

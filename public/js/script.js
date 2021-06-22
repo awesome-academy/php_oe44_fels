@@ -4,25 +4,25 @@ $(document).ready(function () {
     $("#filter").change(function () {
         var valueFilter = $("#filter option:selected").val();
         $.ajax({
-            url: "http://"+window.location.host+"/api/words/" + valueFilter,
+            url: "http://" + window.location.host + "/api/words/" + valueFilter,
             method: 'GET',
             success: function (e) {
                 $('#wordElements').empty();
                 let data = e['data'];
                 var index = 1;
                 let elementOld;
-                if(data.length){
+                if (data.length) {
                     for (let element of data) {
-                        if(index > 1 && valueFilter == 2 && element['category_id'] != elementOld['category_id']){
+                        if (index > 1 && valueFilter == 2 && element['category_id'] != elementOld['category_id']) {
                             $('#wordElements').append('<hr class="between">');
                         }
-                        let el= `<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right">${index}</span><h4 class="text-c-purple">${element['vocabulary']}<span class="font-italic category"> (${element['category_name']})</span></h4><h6 class="text-muted m-b-0">${element['translate']}</h6></div></div></div></div></div>`;
+                        let el = `<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right">${index}</span><h4 class="text-c-purple">${element['vocabulary']}<span class="font-italic category"> (${element['category_name']})</span></h4><h6 class="text-muted m-b-0">${element['translate']}</h6></div></div></div></div></div>`;
                         $('#wordElements').append(el);
                         elementOld = element;
                         index++;
                     };
                 }
-                else{
+                else {
                     $('#wordElements').append('<span>Nothing...</span>');
                 }
             }
@@ -333,7 +333,7 @@ function checkAnswer(idQuestion) {
         }
         else {
             $.ajax({
-                url: "http://"+window.location.host+"/api/questions/check",
+                url: "http://" + window.location.host + "/api/questions/check",
                 method: 'POST',
                 data: {
                     id: idQuestion,
@@ -378,7 +378,7 @@ function saveResult() {
     setTimeout(function () {
         $(document).ready(function () {
             $.ajax({
-                url: "http://"+window.location.host+"/api/user/lesson/result",
+                url: "http://" + window.location.host + "/api/user/lesson/result",
                 method: 'POST',
                 data: {
                     result: resultAnswer,
@@ -387,9 +387,110 @@ function saveResult() {
                     resultAccepts, resultAccepts,
                 },
                 success: function (e) {
-                    window.location.replace("http://"+window.location.host+"/lessons/" + e);
+                    window.location.replace("http://" + window.location.host + "/lessons/" + e);
                 }
             });
         });
     }, 2000);
+}
+
+var ping = $('#ping');
+var notificationsWrapper = $('#notification-header');
+var notificationsCountElem = notificationsWrapper.find('label[data-count]');
+var notificationsCount = parseInt(notificationsCountElem.data('count'));
+var notifications = $('#accordion');
+
+var pusher = new Pusher('7e9599866486c64c29f0', {
+    encrypted: true,
+    cluster: "ap1"
+});
+
+// Subscribe to the channel we specified in our Laravel Event
+var channel = pusher.subscribe('development');
+
+// Bind a function to a Event (the full Laravel class)
+channel.bind('my-event', function (data) {
+    data = data['data'];
+    var existingNotifications = notifications.html();
+    var newNotificationHtml;
+    if (data.type == 0) {
+        newNotificationHtml = `<div id="notification-show" class="accordion-panel">
+                                    <div class="accordion-heading row" role="tab" id="heading${data.id}">
+                                        <h3 class="card-title accordion-title col-8">`;
+        if (data.is_read == 0) {
+
+            newNotificationHtml = newNotificationHtml.concat(`<a id="title${data.id}" onclick='showContentNotify("${data.id}")' class="accordion-msg waves-effect waves-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${data.id}" aria-expanded="true" aria-controls="collapseOne${data.id}">
+                        ${data.content.substring(0, 40)}...</a>`);
+        } else {
+
+            newNotificationHtml = newNotificationHtml.concat(`<a id="title${data.id}" class="waves-effect waves-dark nomal" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${data.id}" aria-expanded="true" aria-controls="collapseOne${data.id}">
+                        ${data.content.substring(0, 40)}...</a>`);
+        }
+    } else {
+        newNotificationHtml = `<div id="notification-show" class="accordion-panel">
+                                    <div class="accordion-heading row" role="tab" id="heading${data.id}">
+                                        <h3 class="card-title accordion-title col-8">`;
+        if (data.is_read == 0) {
+
+            newNotificationHtml = newNotificationHtml.concat(`<a id="title${data.id}" onclick='showContentNotify("${data.id}")' class="accordion-msg waves-effect waves-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${data.id}" aria-expanded="true" aria-controls="collapseOne${data.id}">
+                        ${data.content.substring(0, 40)}...</a>`);
+        } else {
+
+            newNotificationHtml = newNotificationHtml.concat(`<a id="title${data.id}" class="waves-effect waves-dark nomal" data-toggle="collapse" data-parent="#accordion" href="#collapseOne${data.id}" aria-expanded="true" aria-controls="collapseOne${data.id}">
+                        ${data.content.substring(0, 40)}...</a>`);
+        }
+    }
+
+    newNotificationHtml = newNotificationHtml.concat(`</h3>
+                                                        <span class="float-right txt-time col-4">${data.created_at}</span>
+                                                            </div>
+                                                                <div id="collapseOne${data.id}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading${data.id}">
+                                                                    <div class="accordion-content accordion-desc">
+                                                                        <p>
+                                                                            ${data.content}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>`);
+
+    notifications.html(newNotificationHtml + existingNotifications);
+
+    notificationsCount += 1;
+    notificationsCountElem.attr('data-count', notificationsCount);
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+    if (notificationsCount > 0) {
+        ping.addClass('badge label-danger');
+    } else {
+        ping.removeClass('badge label-danger');
+    }
+});
+
+function showContentNotify(id) {
+
+    if ($('#title' + id).css('font-weight') != 100) {
+        $('#title' + id).css("font-weight", "100");
+        $.ajax({
+            url: "http://" + window.location.host + "/api/notification/update/" + id,
+            method: 'PUT',
+            data: {
+                id: id
+            },
+            success: function (e) {
+                if (e['message'] == 'success') {
+                    notificationsCount -= 1;
+                    notificationsCountElem.attr('data-count', notificationsCount);
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+                    if (notificationsCount > 0) {
+                        ping.addClass('badge label-danger');
+                    } else {
+                        ping.removeClass('badge label-danger');
+                    }
+                }
+            }
+        });
+    }
+
+
 }

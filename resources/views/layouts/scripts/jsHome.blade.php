@@ -11,12 +11,12 @@
 <script type="text/javascript" src="{{asset('js/modernizr/modernizr.js')}} "></script>
 <!-- slimscroll js -->
 <script type="text/javascript" src="{{asset('js/SmoothScroll.js')}}"></script>
-<script src="{{asset('js/jquery.mCustomScrollbar.concat.min.js')}} "></script>
 
 <!-- menu js -->
 <script src="{{asset('js/pcoded.min.js')}}"></script>
 <script src="{{asset('js/vertical-layout.min.js')}}"></script>
 <!-- custom js -->
+<script src="//js.pusher.com/3.1/pusher.min.js"></script>
 <script type="text/javascript" src="{{asset('js/script.js')}} "></script>
 <script src="{{asset('js/textToSpeech.js')}}"></script>
 <script>

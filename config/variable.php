@@ -9,4 +9,6 @@ return [
     'paginate_course' => 4,
     'paginate_lesson' => 5,
     'paginate_category' => 4,
+    'unread' => 0,
+    'readed' => 1,
 ];

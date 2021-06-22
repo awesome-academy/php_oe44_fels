@@ -34,6 +34,14 @@ File: style.css
     from {width: 50%; opacity:0;}
     to {width: 100%; opacity:1;}
   }
+.nomal{
+    display: block;
+    color: #222222;
+    padding: 14px 20px;
+    border-top: 1px solid #ddd;
+    font-weight: 100;
+    cursor: pointer;
+}
 .category{
     font-size: 15px;
     color: black;
@@ -51,6 +59,12 @@ File: style.css
 }
 .txt-cate{
     font-size: 75%;
+}
+.txt-time{
+    font-size: 13px;
+    padding: 14px;
+    color: #222222;
+    text-align: right;
 }
 .txt-vocabulary{
     font-size: 20px;
