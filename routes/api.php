@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\UserLessonController;
 use App\Http\Controllers\WordController;
 use App\Models\Question;
@@ -27,3 +28,4 @@ Route::post('user/lesson/result', [UserLessonController::class, 'updateResult'])
 
 Route::get('words/{option}', [WordController::class, 'filter'])->name('words');
 
+Route::PUT('notification/update/{id}', [NotifyController::class, 'updateRead']);
