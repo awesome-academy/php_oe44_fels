@@ -15,10 +15,10 @@ class TopicSeeder extends Seeder
     public function run()
     {
         $data = array(
-            ['name'=>'Information Technology'],
+            ['name'=>'Animals'],
             ['name'=>'Family'],
-            ['name'=>'Friend'],
-            ['name'=>'Love'],
+            ['name'=>'Colors'],
+            ['name'=>'Jobs'],
         );
 
         DB::table('topics')->insert($data);
