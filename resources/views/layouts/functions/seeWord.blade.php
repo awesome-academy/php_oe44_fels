@@ -25,7 +25,7 @@
                         <label class="col-sm-1 col-form-label text-center">
                             <h6>@lang('filter') <i class="ti-filter"></i></h6>
                         </label>
-                        <div class="col-sm-11">
+                        <div class="col-sm-6">
                             <select id="filter" name="select" class="form-control">
                                 <option value="0">@lang('no_filter')</option>
                                 <option value="1">@lang('filter_alphabet')</option>
@@ -33,6 +33,15 @@
                                 <option value="3">@lang('filter_learned')</option>
                                 <option value="4">@lang('filter_unlearned')</option>
                             </select>
+                        </div>
+                        <div class="col-5 p-b-0">
+                            <div class="form-material">
+                                <div class="form-group form-primary">
+                                    <input id="txtserach" type="text" name="footer-email" class="form-control" required="">
+                                    <span class="form-bar"></span>
+                                    <label class="float-label"><i class="fa fa-search m-r-10"></i>@lang('search')</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="wordElements" class="row">
