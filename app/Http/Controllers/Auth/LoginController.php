@@ -100,7 +100,7 @@ class LoginController extends Controller
             $user->provider_id = $data->id;
             $user->avatar = $data->avatar;
             $user->save();
-            event(new SendAdminNotificationUserRegisted($user->email, '', false));
+            event(new SendAdminNotificationUserRegisted($user->email, '', Config::get('variable.notifi_user_register')));
         }
 
         Auth::login($user);

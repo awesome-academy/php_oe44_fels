@@ -13,7 +13,7 @@ class NotifyController extends Controller
 
     public function index()
     {
-        $notifications = Notification::orderBy('created_at', 'desc')->get();
+        $notifications = Notification::where('role', 'ADM')->orderBy('created_at', 'desc')->get();
 
         foreach ($notifications as $notify) {
             $notify->time = Carbon::createFromFormat('Y-m-d H:i:s', $notify->created_at)->format('H:i:s Y-m-d');

@@ -79,7 +79,7 @@ class RegisterController extends Controller
         }
         $avatar = $data['email'] . '.' . strrev($typeAvatar);
         
-        event(new SendAdminNotificationUserRegisted($data['email'], '', false));
+        event(new SendAdminNotificationUserRegisted($data['email'], '', Config::get('variable.notifi_user_register')));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

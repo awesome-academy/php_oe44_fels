@@ -112,6 +112,13 @@
     "update_success_category": "Update Success Category",
     "delete_fail_category": "Delete Fail Category",
     "delete_success_category": "Delete Success Category",
+
+    "notification": "Notification",
+    "notifications": "Notifications",
+    "mark_all_as_read": "Mark all as read",
+    "home": "Home",
+    "learn_again" : "Learn Again",
+
     "error":{
         "500" : "Server is experiencing problems, Please come back later"
     }

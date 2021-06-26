@@ -29,7 +29,7 @@
       <div class="page-wrapper">
         <!-- Page-body start -->
         @if(session('status'))
-            <p class="text-danger">{{ session('status') }}</p>
+        <p class="text-danger">{{ session('status') }}</p>
         @endif
 
         @if(count($user_topics) == 0)
@@ -73,7 +73,12 @@
           <div class="card">
             <div class="card-block caption-breadcrumb">
               <div class="breadcrumb-header">
-                <h5>{{$value->name}}</h5>
+                <h5>{{$value->name}}
+                  @if(\App\Models\User_Course::where('course_id', $value->id)->where('user_id', Auth::user()->id)->get()[0]->end_day)
+                    <label class="label label-success m-0"><i class="icofont icofont-check-circled"></i></label>
+                  @endif
+                </h5>
+
                 <span>{{$value->described}}</span>
               </div>
               <div class="page-header-breadcrumb">
@@ -94,7 +99,12 @@
 
                     </a>
                   </li>
-                  <li class="float-right"><a href="{{ route('lessons', $value->id) }}">@lang('learn_now')</a>
+                  <li class="float-right">
+                    @if(\App\Models\User_Course::where('course_id', $value->id)->where('user_id', Auth::user()->id)->get()[0]->end_day)
+                    <a href="{{ route('lessons', $value->id) }}">@lang('learn_again')</a>
+                    @else
+                    <a href="{{ route('lessons', $value->id) }}">@lang('learn_now')</a>
+                    @endif
                   </li>
                 </ul>
               </div>

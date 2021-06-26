@@ -16,8 +16,8 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->string('type');
             $table->boolean('is_read')->default(false);
+            $table->string('role')->default('ADM'); // ADMIN
             $table->timestamps();
         });
     }

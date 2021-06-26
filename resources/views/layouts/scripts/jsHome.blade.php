@@ -19,8 +19,9 @@
 <script src="{{asset('js/vertical-layout.min.js')}}"></script>
 <!-- custom js -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="//js.pusher.com/3.1/pusher.min.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script type="text/javascript" src="{{asset('js/script.js')}} "></script>
+<script type="text/javascript" src="{{asset('js/notifications.js')}} "></script>
 <script src="{{asset('js/textToSpeech.js')}}"></script>
 <script>
     function showHideInfor(v) {
