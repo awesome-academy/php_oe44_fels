@@ -11,7 +11,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        // $user = Auth::guard('admin')->user();
+
         return view('auth.admin.home');
     }
 

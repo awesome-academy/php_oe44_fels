@@ -27,8 +27,13 @@
     <!-- Main-body start -->
     <div class="main-body">
       <div class="page-wrapper">
-
-        
+        <input id="select-topic-month" type="month">
+        <div class="row">
+          <div id="donut-topic-month" class="col-6"></div>
+          <div id="donut-topic-year" class="col-6"></div>
+        </div>
+        <div id="linechart" class="m-5 w-70"></div>
+        <div id="bar-course-month" class="m-5 w-70"></div>
       </div>
     </div>
   </div>

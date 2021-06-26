@@ -47,6 +47,11 @@
                                 <i class="ti-fullscreen"></i>
                             </a>
                         </li>
+                        <li>
+                            <div class="mt-1 text-white">
+                                <label class="label label-inverse-default" id="time"></label>
+                            </div>
+                        </li>
                     </ul>
                     <ul class="nav-right">
                         <li class="user-profile">
@@ -89,7 +94,7 @@
                         <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">@lang('catalog')</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li>
-                                <a href="#" class="waves-effect waves-dark">
+                                <a href="{{ route('admin.home') }}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('home')</span>
                                     <span class="pcoded-mcaret"></span>
@@ -102,9 +107,9 @@
                                         <b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('notifications')
                                         @if (($num_notify_unread = App\Models\Notification::where('is_read', 0)->count()) != 0)
-                                            <label id="ping" data-count="{{ $num_notify_unread }}" class="badge label-danger notif-count label">{{ $num_notify_unread }}</label>
+                                        <label id="ping" data-count="{{ $num_notify_unread }}" class="badge label-danger notif-count label">{{ $num_notify_unread }}</label>
                                         @else
-                                            <label id="ping" data-count="{{ $num_notify_unread }}" class="notif-count label">{{ $num_notify_unread }}</label>
+                                        <label id="ping" data-count="{{ $num_notify_unread }}" class="notif-count label">{{ $num_notify_unread }}</label>
                                         @endif
                                     </span>
                                 </a>
@@ -294,4 +299,3 @@
                             </div>
                         </nav>
                         @endif
-                        

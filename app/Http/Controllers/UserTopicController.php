@@ -21,10 +21,21 @@ class UserTopicController extends Controller
         foreach($data as $key=>$value){
             if($key == '_token')
                 continue;
-            array_push($listTopicSelected, ['user_id'=>$user_id, 'topic_id'=>$value]);
+            array_push($listTopicSelected, ['user_id'=>$user_id, 'topic_id'=>$value, 'created_at' => DB::raw('CURRENT_TIMESTAMP'),
+'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
         }
-        DB::table('user_topics')->insertOrIgnore($listTopicSelected);
+        DB::beginTransaction();
+        try {
+            
+            User_Topic::insert($listTopicSelected);
+            DB::commit();
+
+            return redirect()->route('home');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->route('home')->with('status', trans('select_again'));
+        }
         
-        return redirect()->route('home');
     }
 }
