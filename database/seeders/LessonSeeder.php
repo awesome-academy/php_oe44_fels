@@ -15,16 +15,15 @@ class LessonSeeder extends Seeder
     public function run()
     {
         $data = array(
-            ['course_id'=>1,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>1,'name'=>'Lesson 2','described'=>'Mô tả bài học'],
-            ['course_id'=>2,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>2,'name'=>'Lesson 2','described'=>'Mô tả bài học'], 
-            ['course_id'=>3,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>4,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>5,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>6,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>7,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
-            ['course_id'=>8,'name'=>'Lesson 1','described'=>'Mô tả bài học'],
+            ['course_id'=>1,'name'=>'Basic Animals Lesson 1','described'=>'Something content...'],
+            ['course_id'=>1,'name'=>'Basic Animals Lesson 2','described'=>'Something content...'],
+            ['course_id'=>2,'name'=>'Advanced Animals Lesson 1','described'=>'Something content...'],
+
+            ['course_id'=>3,'name'=>'Basic Family Lesson 1','described'=>'Something content...'],
+            ['course_id'=>3,'name'=>'Basic Family Lesson 2','described'=>'Something content...'],
+            ['course_id'=>3,'name'=>'Basic Family Lesson 3','described'=>'Something content...'],
+            ['course_id'=>4,'name'=>'Advanced Family Lesson 1','described'=>'Something content...'],
+            
         );
 
         DB::table('lessons')->insert($data);

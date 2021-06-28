@@ -25,7 +25,7 @@ class WordController extends Controller
         $dataWords = DB::table('words')
             ->join('lessons', 'lessons.id', '=', 'words.lesson_id')
             ->join('user_courses', 'user_courses.course_id', '=', 'lessons.course_id')
-            ->where('user_courses.id', '=', Auth::user()->id)
+            ->where('user_courses.user_id', '=', Auth::user()->id)
             ->get();
 
         $data = [];

@@ -35,8 +35,8 @@
                         @foreach($items as $value)
 
                         @if(in_array($value->id,$arrayCourseExist))
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card mb-1">
+                        <div class="col-xl-6 col-6 col-md-6">
+                            <div class="card m-2">
                                 <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
@@ -67,8 +67,8 @@
                         
                         </div>
                         @else
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card mb-1">
+                        <div class="col-xl-6 col-6 col-md-6">
+                            <div class="card m-2">
                                 <div class="card-block">
                                     <div class="row align-items-center">
                                         <div class="col-8">
@@ -76,7 +76,7 @@
                                             <h6 class="text-muted m-b-0">{{$value->described}}</h6>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <form class="text-center" action="{{route('user_course.insert',$value->id)}}" method="POST">
+                                            <form class="text-center" action="{{route('user_course.insert', $value->id)}}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn bg-white waves-effect waves-dark btn-success btn-outline-success btn-icon"><i class="icofont icofont-check-circled text-success"></i></button>
                                             </form>
