@@ -23,7 +23,7 @@ class UserCourseController extends Controller
 
         $user_course->save();
 
-        event(new SendAdminNotificationUserRegisted(Auth::user()->email, Course::find($course_id), true));
+        event(new SendAdminNotificationUserRegisted(Auth::user()->email, Course::find($course_id), Config::get('variable.notifi_user_course')));
 
         return redirect()->back();
     }

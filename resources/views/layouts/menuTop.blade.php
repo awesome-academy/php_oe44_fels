@@ -20,8 +20,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{route('home')}}">
-                        <img class="img-fluid" src="" alt="Theme-Logo" />
+                    <a href="{{route('admin.home')}}">
+                        <h3 class="img-fluid pl-3 pt-3 pb-1">FELS</h3>
                     </a>
                     <a class="mobile-options waves-effect waves-light">
                         <i class="ti-more"></i>
@@ -105,8 +105,8 @@
                                     <span class="pcoded-micon">
                                         <i class="ti-bell"></i>
                                         <b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('notifications')
-                                        @if (($num_notify_unread = App\Models\Notification::where('is_read', 0)->count()) != 0)
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">@lang('notification')
+                                        @if (($num_notify_unread = App\Models\Notification::where([['is_read', 0], ['role', 'ADM']])->count()) != 0)
                                         <label id="ping" data-count="{{ $num_notify_unread }}" class="badge label-danger notif-count label">{{ $num_notify_unread }}</label>
                                         @else
                                         <label id="ping" data-count="{{ $num_notify_unread }}" class="notif-count label">{{ $num_notify_unread }}</label>
@@ -146,7 +146,6 @@
                     </div>
                 </nav>
                 @else
-
                 <nav class="navbar header-navbar pcoded-header">
                     <div class="navbar-wrapper">
                         <div class="navbar-logo">
@@ -165,7 +164,7 @@
                                 </div>
                             </div>
                             <a href="{{route('home')}}">
-                                <img class="img-fluid" src="" alt="Theme-Logo" />
+                                <h3 class="img-fluid pl-3 pt-3 pb-1">FELS</h3>
                             </a>
                             <a class="mobile-options waves-effect waves-light">
                                 <i class="ti-more"></i>
@@ -195,7 +194,37 @@
                             <ul class="nav-right">
                                 <a href="{{ route('i18n','vi') }}">VI</a>
                                 <a href="{{ route('i18n','en') }}">EN</a>
+                                <li class="header-notification" id="notification-head">
+                                    <a href="#!" class="waves-effect waves-light">
+                                        <i class="ti-bell"></i>
+                                        <span id="bing" class="badge bg-c-red"></span>
+                                    </a>
+                                    <ul class="show-notification">
+                                        <li>
+                                            <h6>@lang('notification')</h6>
+                                            <span id="count-notify-user" data-count="{{App\Models\Notification::where('role', Auth::user()->id)->count()}}" class="float-right label label-danger">{{App\Models\Notification::where('role', Auth::user()->id)->count()}}</span>
+                                        </li>
+                                        <li>
+                                            <ul id="accor" class="show-notification">
+                                                @foreach(App\Models\Notification::where('role', Auth::user()->id)->get() as $item)
+                                                <li  class="waves-effect waves-light">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h5 class="notification-user">Bot</h5>
+                                                            <p class="notification-msg">{{ $item->content}}.</p>
+                                                            <span class="notification-time">{{$item->created_at}}</span>
+                                                        </div>
+                                                        <button>del</button>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
                                 <li class="user-profile header-notification">
+                                    <a id="id_user" class="d-none"> {{Auth::user()->id}} </a>
                                     <a href="#!" class="waves-effect waves-light">
                                         @if(Auth::user()->provider_id && strpos(Auth::user()->avatar,'http'))
                                         <img src="{{ Auth::user()->avatar }}" class="img-radius" alt="{{ Auth::user()->name }}">

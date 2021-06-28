@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use JsonException;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserLessonController extends Controller
 {
     public function index($course_id)
@@ -79,7 +81,7 @@ class UserLessonController extends Controller
         $ressult = $request->get('result');
         $lesson_id = $request->get('lesson_id');
         $user_id = $request->get('user_id');
-        $resultAccepts = $request->get('resultAccepts');
+        $resultAccepts = $request->get('resultAccepts') == '' ? 0 : $request->get('resultAccepts');
         $wordsCount = Word::where('lesson_id', $lesson_id)->count();
 
         $course_id = Lesson::find($lesson_id)->course_id;
@@ -93,13 +95,30 @@ class UserLessonController extends Controller
         $user = User::find($user_id);
         $words = $user->learned_word_list;
         $wordsOld = explode(',', $words);
-        foreach($resultAccepts as $item){
-            if(!Arr::has($wordsOld, $item)){
-                array_push($wordsOld, $item);
+        if($resultAccepts != 0){
+            foreach($resultAccepts as $item){
+                if(!Arr::has($wordsOld, $item)){
+                    array_push($wordsOld, $item);
+                }
             }
         }
         $user->learned_word_list = implode(',', $wordsOld);
         $user->save();
+
+    //  Check done this course
+        $arrayLessonOfCourse = Course::find($course_id)->lessons->pluck('id');
+       
+        $numberDone = 0;
+        foreach ($arrayLessonOfCourse as $item){
+            $var = User_Lesson::where([['user_id', Auth::user()->id], ['lesson_id', $item]])->first();
+            if( isset($var) && $var->status == 1){
+                $numberDone++;
+            }
+        }
+
+        if($numberDone == count($arrayLessonOfCourse)){
+            User_Course::where([['user_id', Auth::user()->id], ['course_id', $course_id]])->update(['end_day' => DB::raw('CURRENT_TIMESTAMP')]);
+        }
 
         return $course_id;
     }

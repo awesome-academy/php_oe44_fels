@@ -11,4 +11,7 @@ return [
     'paginate_category' => 4,
     'unread' => 0,
     'readed' => 1,
+    'notifi_user_register' => 0,
+    'notifi_user_course' => 1,
+    'notifi_user_completed_course' => 2,
 ];

@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Notification;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -20,19 +21,22 @@ class SendAdminNotificationUserRegisted implements ShouldBroadcast
 
     public $data;
 
-    public function __construct($email, $course, $optione = false)
+    public function __construct($email, $course, $optione)
     {
         $notify = new Notification();
-
-        if (!$optione) { // notify have user registed account
+        $user = User::where('email', $email)->first();
+        if ($optione == Config::get('variable.notifi_user_register')) { // notify have user registed account
             $content = "Email account $email has been successfully registered.";
-            $notify->type = Config::get('variable.unread');
             $notify->content = $content;
 
-        } else { // notify have user registed an acourse
+        } else if($optione == Config::get('variable.notifi_user_course')){ // notify have user registed an acourse
             $content = "Email account $email just registered for the course is $course->name";
-            $notify->type = Config::get('variable.unread');;
             $notify->content = $content;
+        }
+        else{ // notify to user course completed
+            $content = "You have not completed the $course->name course.";
+            $notify->content = $content;
+            $notify->role = $user->id;
         }
 
         $notify->save();
