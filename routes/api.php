@@ -29,6 +29,8 @@ Route::post('user/lesson/result', [UserLessonController::class, 'updateResult'])
 
 Route::get('words/{option}', [WordController::class, 'filter'])->name('words');
 
+Route::get('words/search/{char}', [WordController::class, 'search'])->name('search');
+
 Route::put('notification/update/{id}', [NotifyController::class, 'updateRead']);
 
 Route::get('chart/user-register/{year}', [ChartController::class, 'userRegister'] );

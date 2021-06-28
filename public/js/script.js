@@ -1,6 +1,30 @@
 "use strict";
 $(document).ready(function () {
+    $("#txtserach").change(function () {
+        var value = $("#txtserach").val();
+        $.ajax({
+            url: "http://" + window.location.host + "/api/words/search/" + value,
+            method: 'GET',
+            success: function (e) {
+                var dataWords = e['data'];
+                console.log(dataWords);
+                $('#wordElements').empty();
+                var flag = false;
+                for (let index = 0; index < dataWords.length; index++) {
+                    const element = dataWords[index];
+                    var el = `<div class="col-xl-6 col-md-6 mb-3"><div class="card mb-1"><div class="card-block"><div class="row align-items-center"><div class="col-12"><span class="float-right">${(index + 1)} </span><h4 class="text-c-purple">${element['vocabulary']}<span class="font-italic category"> (${element['category_name']})</span></h4><h6 class="text-muted m-b-0">${element['translate']}</h6></div></div></div></div></div>`;
+                    $('#wordElements').append(el);
+                    flag = true;
+                }
 
+                if (!flag) {
+                    var el = '<span> Nothing... </span>';
+                    $('#wordElements').append(el);
+                }
+            }
+        });
+    }).change();
+    
     $("#filter").change(function () {
         var valueFilter = $("#filter option:selected").val();
         $.ajax({
@@ -585,7 +609,9 @@ function getDataUserRegisterByYear(year = today.getFullYear()) {
                 var options = {
                     chart: {
                         title: 'Statistics of account registrations by month in ' + year,
-                        subtitle: ''
+                    },
+                    vAxis: {
+                        title: 'Total Register',
                     },
                     width: 1000,
                     height: 400,
@@ -609,7 +635,6 @@ function getDataChartByCourseByRegister(month = today.getMonth() + 1, year = tod
         url: "http://" + window.location.host + "/api/chart/course-regiser/" + month + "/" + year,
         method: 'GET',
         success: function (e) {
-            console.log(e);
             google.charts.setOnLoadCallback(drawChar);
             function drawChar() {
                 var arr = [['Course', 'Number of user registed'],];
@@ -626,6 +651,7 @@ function getDataChartByCourseByRegister(month = today.getMonth() + 1, year = tod
                     hAxis: {
                         title: 'Total Register',
                         minValue: 0,
+                        format: '#',
                     },
                     vAxis: {
                         title: 'Course'
