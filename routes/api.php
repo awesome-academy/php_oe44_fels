@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Admin\ChartController;
 use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\UserLessonController;
 use App\Http\Controllers\WordController;
@@ -28,4 +29,12 @@ Route::post('user/lesson/result', [UserLessonController::class, 'updateResult'])
 
 Route::get('words/{option}', [WordController::class, 'filter'])->name('words');
 
-Route::PUT('notification/update/{id}', [NotifyController::class, 'updateRead']);
+Route::put('notification/update/{id}', [NotifyController::class, 'updateRead']);
+
+Route::get('chart/user-register/{year}', [ChartController::class, 'userRegister'] );
+
+Route::get('chart/topic-of-month/{month}/{year}', [ChartController::class, 'topicOfMonth'] );
+
+Route::get('chart/topic-of-year/{year}', [ChartController::class, 'topicOfYear']);
+
+Route::get('chart/course-regiser/{month}/{year}', [ChartController::class, 'courseRegister']);

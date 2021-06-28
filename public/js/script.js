@@ -326,7 +326,6 @@ var resultAnswer = 0;
 var resultAccepts = [];
 function checkAnswer(idQuestion) {
     var answer = $('input[name=options' + idQuestion + ']:checked', '#questions' + idQuestion).val();
-    console.log(answer);
     $(document).ready(function () {
         if (!answer) {
             alert('Havent chosen an answer yet');
@@ -491,6 +490,169 @@ function showContentNotify(id) {
             }
         });
     }
-
-
 }
+
+var today = new Date();
+var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+document.getElementById('time').innerHTML = date;
+var monOfYear = [
+    'January', 'February', 'March',
+    'April', 'May', 'June',
+    'July', 'August', 'September',
+    'October', 'November', 'December'
+];
+google.charts.load('current', {
+    'packages': ['line', 'corechart', 'bar']
+});
+
+function getDataChartByTopicMonth(month = today.getMonth() + 1, year = today.getFullYear()) {
+    $.ajax({
+        url: "http://" + window.location.host + "/api/chart/topic-of-month/" + month + "/" + year,
+        method: 'GET',
+        success: function (e) {
+            google.charts.setOnLoadCallback(drawDonutChart)
+            function drawDonutChart() {
+                var arr = [['Name Topic', 'Number Selected'],];
+                for (let element of e) {
+                    arr.push([element.name, element.count]);
+                }
+
+                var data = google.visualization.arrayToDataTable(arr);
+                var options = {
+                    title: 'Statistics of likes by topic of ' + monOfYear[month[1] - 1],
+                    pieHole: 0.4,
+                    width: 500,
+                    height: 400,
+                    backgroundColor: {
+                        fill: '#eff5f7',
+                    },
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('donut-topic-month'));
+                chart.draw(data, options);
+            }
+        }
+    });
+}
+
+function getDataChartByTopicYear(year = today.getFullYear()) {
+    $.ajax({
+        url: "http://" + window.location.host + "/api/chart/topic-of-year/" + year,
+        method: 'GET',
+        success: function (e) {
+            google.charts.setOnLoadCallback(drawDonutChart)
+            function drawDonutChart() {
+                var arr = [['Name Topic', 'Number Selected'],];
+                for (let element of e) {
+                    arr.push([element.name, element.count]);
+                }
+
+                var data = google.visualization.arrayToDataTable(arr);
+                var options = {
+                    title: 'Statistics of likes by topic of ' + year,
+                    pieHole: 0.4,
+                    width: 500,
+                    height: 400,
+                    backgroundColor: {
+                        fill: '#eff5f7'
+                    },
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('donut-topic-year'));
+                chart.draw(data, options);
+            }
+        }
+    });
+}
+function getDataUserRegisterByYear(year = today.getFullYear()) {
+    $.ajax({
+        url: "http://" + window.location.host + "/api/chart/user-register/" + year,
+        method: 'GET',
+        success: function (e) {
+            google.charts.setOnLoadCallback(drawLineChart)
+            function drawLineChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Month');
+                data.addColumn('number', 'Number Of User Registed');
+                var arr = [];
+                var i = 1;
+                monOfYear.forEach(element => {
+                    arr.push([element, e[i]]);
+                    i++;
+                });
+                data.addRows(arr);
+
+                var options = {
+                    chart: {
+                        title: 'Statistics of account registrations by month in ' + year,
+                        subtitle: ''
+                    },
+                    width: 1000,
+                    height: 400,
+                    backgroundColor: {
+                        fill: '#eff5f7'
+                    },
+                    chartArea: {
+                        backgroundColor: '#eff5f7'
+                    }
+                };
+                var chart = new google.charts.Line(document.getElementById('linechart'));
+
+                chart.draw(data, google.charts.Line.convertOptions(options));
+            }
+        }
+    });
+}
+
+function getDataChartByCourseByRegister(month = today.getMonth() + 1, year = today.getFullYear()) {
+    $.ajax({
+        url: "http://" + window.location.host + "/api/chart/course-regiser/" + month + "/" + year,
+        method: 'GET',
+        success: function (e) {
+            console.log(e);
+            google.charts.setOnLoadCallback(drawChar);
+            function drawChar() {
+                var arr = [['Course', 'Number of user registed'],];
+                for (let element of e) {
+                    arr.push([element.name, element.count]);
+                }
+
+                var data = google.visualization.arrayToDataTable(arr);
+
+                var options = {
+                    title: 'Statistics of course registrations by month in ' + year,
+                    chartArea: { width: '50%' },
+                    isStacked: true,
+                    hAxis: {
+                        title: 'Total Register',
+                        minValue: 0,
+                    },
+                    vAxis: {
+                        title: 'Course'
+                    },
+                    backgroundColor: {
+                        fill: '#eff5f7'
+                    },
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('bar-course-month'));
+                chart.draw(data, options);
+            }
+        }
+    });
+}
+
+
+$(document).ready(function () {
+    getDataChartByTopicMonth();
+    getDataChartByTopicYear();
+    getDataUserRegisterByYear();
+    getDataChartByCourseByRegister();
+
+    $("#select-topic-month").change(function () {
+        var value = $(this).val().split('-');
+        getDataChartByTopicYear(value[0]);
+        getDataChartByTopicMonth(value[1], value[0]);
+        getDataUserRegisterByYear(value[0]);
+        getDataChartByCourseByRegister(value[1], value[0]);
+    }).change();
+});
